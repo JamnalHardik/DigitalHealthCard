@@ -15,10 +15,12 @@ var userSchema = mongoose.Schema({
     salt: String,
     aadharNumber: {
         type: Number,
+        unique: true,
         required: true
     },
     email: {
         type: String,
+        unique: true,
         set: v => v.toLowerCase(),
         required: true
     },
