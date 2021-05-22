@@ -5,7 +5,8 @@ const { v1: uuidv1 } = require('uuid');
 var userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     lastName: String,
     encryptedPassword: {
