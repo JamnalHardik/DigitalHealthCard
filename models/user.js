@@ -28,7 +28,11 @@ var userSchema = new mongoose.Schema({
     dateOfBirth: {
         type: Date,
         required: true
-    }    
+    },
+    role: {
+        type: Number,
+        default: 0
+    } 
 });
 
 userSchema
@@ -43,7 +47,7 @@ userSchema
     });
 
 userSchema.methods = {
-    autheticate: function (plainpassword) {
+    authenticate: function (plainpassword) {
         return this.securePassword(plainpassword) === this.encryptedPassword;
     },
 

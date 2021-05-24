@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { signup } = require("../controllers/auth");
+const { signup, signin, signout, isSignedIn } = require("../controllers/auth");
 const { check } = require('express-validator');
 
 router.post("/signup",
@@ -13,5 +13,14 @@ router.post("/signup",
             .withMessage('must be at least 5 chars long')
     ]
     , signup);
+
+router.post("/signin",
+    [
+        check('password')
+            .isLength({ min: 5 })
+            .withMessage('must be at least 5 chars long')
+    ], signin)
+
+router.get("/signout", signout)
 
 module.exports = router;
