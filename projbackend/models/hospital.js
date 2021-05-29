@@ -2,21 +2,22 @@ var mongoose = require("mongoose");
 const crypto = require('crypto');
 const { v1: uuidv1 } = require('uuid');
 
-var userSchema = new mongoose.Schema({
-    firstName: {
+var hospitalSchema = new mongoose.Schema({
+    hospitalName: {
         type: String,
         required: true,
-        trim: true
+        length: 100,
     },
-    lastName: String,
-    encryptedPassword: {
+    address: {
         type: String,
         required: true
     },
-    salt: String,
-    aadharNumber: {
+    registrationNumber: {
         type: Number,
-        unique: true,
+        required: true
+    },
+    mobileNumber: {
+        type: Number,
         required: true
     },
     email: {
@@ -25,17 +26,19 @@ var userSchema = new mongoose.Schema({
         set: v => v.toLowerCase(),
         required: true
     },
-    dateOfBirth: {
-        type: Date,
+    encryptedPassword: {
+        type: String,
         required: true
     },
     role: {
         type: Number,
+        required: true,
         default: 0
-    } 
-});
+    },
+    salt: String
+})
 
-userSchema
+hospitalSchema
     .virtual("password")
     .set(function (password) {
         this._password = password;
@@ -46,7 +49,7 @@ userSchema
         return this._password;
     });
 
-userSchema.methods = {
+hospitalSchema.methods = {
     authenticate: function (plainpassword) {
         return this.securePassword(plainpassword) === this.encryptedPassword;
     },
@@ -64,4 +67,4 @@ userSchema.methods = {
     }
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Hospital", hospitalSchema);

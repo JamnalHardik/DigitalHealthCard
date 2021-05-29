@@ -16,6 +16,9 @@ router.post("/signup",
 
 router.post("/signin",
     [
+        check('email').isEmail().withMessage({
+            message: 'Please check your email'
+        }),
         check('password')
             .isLength({ min: 5 })
             .withMessage('must be at least 5 chars long')
