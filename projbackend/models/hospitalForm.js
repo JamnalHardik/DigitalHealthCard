@@ -13,7 +13,7 @@ var hospitalForm = new mongoose.Schema({
         type: String,
         required: true
     },
-    medicine: {
+    medicineDose: {
         type: String,
         required: true
     }
