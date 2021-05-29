@@ -6,10 +6,11 @@ var hospitalSchema = new mongoose.Schema({
     hospitalName: {
         type: String,
         required: true,
-        length: 100,
+        length: 100
     },
     address: {
         type: String,
+        unique: true,
         required: true
     },
     registrationNumber: {
