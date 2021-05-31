@@ -74,7 +74,7 @@ exports.signin = (req, res) => {
         });
     }
     else {
-        Hospital.findOne({ email }, (err, hospital) => {            
+        Hospital.findOne({ email }, (err, hospital) => {
             if (err) {
                 return res.status(400).json({
                     error: "User Email does not exist"
@@ -113,9 +113,9 @@ exports.isSignedIn = expressJwt({ secret: process.env.SECRET, algorithms: ['HS25
 
 // custom middlewares
 exports.isAuthenticated = (req, res, next) => {
-    console.log(req.profile._id, req.auth._id);
-
-    let checker = req.profile && req.auth && (req.profile._id == req.auth._id); 
+    console.log(req.profile, req.auth);
+    console.log(req.profile._id == req.auth._id)
+    let checker = req.profile && req.auth && (req.profile._id == req.auth._id);
     if (!checker) {
         return res.status(403).json({
             error: "ACCESS DENIED"

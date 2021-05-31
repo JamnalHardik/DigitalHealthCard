@@ -7,7 +7,8 @@ const cookieParser = require('cookie-parser');
 const port = 8000;
 
 const authRoutes = require("./routes/auth");
-const hospitalRoutes = require("./routes/hospital")
+const hospitalRoutes = require("./routes/hospital");
+const userRoutes = require("./routes/user");
 
 mongoose.connect('mongodb://localhost:27017/healthCard', {
     useNewUrlParser: true,
@@ -25,6 +26,7 @@ app.use(cookieParser());
 // my routes
 app.use("/api", authRoutes);
 app.use("/api", hospitalRoutes);
+app.use("/api", userRoutes);
 
 
 app.listen(port, () => {

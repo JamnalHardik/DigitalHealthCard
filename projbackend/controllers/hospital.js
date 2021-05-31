@@ -7,8 +7,8 @@ exports.getHospitalById = (req, res, next, id) => {
             return res.status(400).json({
                 error: "No user was found in DB"
             })
-        }        
-        req.profile = hospital;        
+        }
+        req.profile = hospital;
         next();
     })
 }
