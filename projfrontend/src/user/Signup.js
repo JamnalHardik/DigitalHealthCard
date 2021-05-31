@@ -9,7 +9,11 @@ const Signup = () => {
           <h1>Digital Health Card</h1>
         </div>
         <div classname="container">
-          <form>
+          <form id="form-main">
+          <div classname="mb-3">
+              <label for="exampleInputEmail1" classname="form-label">First Name </label>
+              <input type="name" classname="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            </div>
             <div classname="mb-3">
               <label for="exampleInputEmail1" classname="form-label">Email address</label>
               <input type="email" classname="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
