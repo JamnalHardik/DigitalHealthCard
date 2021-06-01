@@ -186,10 +186,10 @@ const Signup = () => {
                 <Input type="password" name="password" id="examplePasswordHosp" placeholder="" />
               </Col>
             </FormGroup>
-            <FormGroup row className="mb-2">
+            <FormGroup row className="mb-2 mt-2">
               <Label for="examplePassword2Hosp" sm={2}>Confirm Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password2" id="examplePassword2Hosp" placeholder="" />
+                <Input type="password" name="password2" id="examplePassword2Hosp" className="mt-2" placeholder="" />
               </Col>
             </FormGroup>
             <div id="center"><Button color="primary" size="lg">Submit</Button>{' '}</div>
