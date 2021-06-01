@@ -46,7 +46,8 @@ label{
     font-size: 18px;
     color: red;
 }
-
-#form-sub{
-    padding-top: 10px;
-}
+#center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
