@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require("mongoose");
 const app = express();
 const cookieParser = require('cookie-parser');
+const cors = require("cors");
 const port = 8000;
 
 const authRoutes = require("./routes/auth");
@@ -22,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/healthCard', {
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 // my routes
 app.use("/api", authRoutes);

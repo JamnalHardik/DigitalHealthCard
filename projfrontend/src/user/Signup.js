@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
 import '../styles.css'
 import { Form, FormGroup, Label, Input, FormText, Button, Col } from 'reactstrap';
-import { signup } from '../auth/helper/index'
+import { signup } from '../auth/helper'
 
 const Signup = () => {
   const [values, setValues] = useState({
-    firstName: "",
-    lastName: "",
-    aadharNumber: "",
-    email: "",
-    password: "",
+    firstName: "Poojan",
+    lastName: "Pandya",
+    aadharNumber: "888866662323",
+    email: "pandya@gmail.com",
+    password: "123456789",
     dateOfBirth: "",
-    phoneNo: "",
+    phoneNo: "7016544608",
     error: "",
     success: false,
     userSignup: "User Signup",
-
+    role: 0
   });
 
 
-  const { firstname, lastName, aadharNumber, email, password, dateOfBirth, error, success, userSignup, phoneNo } = values;
+  const { firstName, lastName, aadharNumber, email, password, dateOfBirth, error, success, userSignup, phoneNo, role } = values;
 
   const handleSelect = name => event => {   
     setValues({ ...values, userSignup: event.target.value })
   }
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value })
+    setValues({ ...values, error: false, [name]: event.target.value })
   }
 
   // const handleChange
@@ -34,14 +34,16 @@ const Signup = () => {
   const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: false })
-    signup({ firstname, lastName, aadharNumber, email, password, dateOfBirth, phoneNo })
+    signup({ firstName, lastName, aadharNumber, email, password, dateOfBirth, phoneNo, role })
       .then(data => {
+        console.log(data);
         if (data.error) {
+          console.log(data.error);
           setValues({ ...values, error: data.error, success: false })
         } else {
           setValues({
             ...values,
-            firstname: "",
+            firstName: "",
             lastName: "",
             aadharNumber: "",
             email: "",
@@ -87,31 +89,31 @@ const Signup = () => {
             <FormGroup row className="mb-2">
               <Label for="examplefirstname" sm={2}>First Name*</Label>
               <Col sm={10}>
-                <Input type="name" name="firstname" id="examplefirstname" onChange={handleChange("firstName")} placeholder="eg-Poojan" />
+                <Input type="name" name="firstname" value={firstName} id="examplefirstname" onChange={handleChange("firstName")} placeholder="eg-Poojan" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="examplelastname" sm={2}>Last Name</Label>
               <Col sm={10}>
-                <Input type="name" name="lastname" id="examplelastname" placeholder="eg-Pandya" onChange={handleChange("lastName")} />
+                <Input type="name" name="lastname" value={lastName} id="examplelastname" placeholder="eg-Pandya" onChange={handleChange("lastName")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="exampleaadhar" sm={2}>Aadhar No*</Label>
               <Col sm={10}>
-                <Input type="name" name="aadhar" id="exampleaadhar" placeholder="12-Digit Aadhar Number" onChange={handleChange("aadharNumber")} />
+                <Input type="name" name="aadhar" value={aadharNumber} id="exampleaadhar" placeholder="12-Digit Aadhar Number" onChange={handleChange("aadharNumber")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="exampleEmail" sm={2}>Email</Label>
               <Col sm={10}>
-                <Input type="email" name="email" id="exampleEmail" placeholder="eg-poojanpandya@gmail.com" onChange={handleChange("email")} />
+                <Input type="email" name="email" value={email} id="exampleEmail" placeholder="eg-poojanpandya@gmail.com" onChange={handleChange("email")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="examplePassword" sm={2}>Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password" id="examplePassword" placeholder="" onChange={handleChange("password")} />
+                <Input type="password" name="password" value={password} id="examplePassword" placeholder="" onChange={handleChange("password")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
@@ -123,13 +125,13 @@ const Signup = () => {
             <FormGroup row className="mb-2">
               <Label for="exampledob" sm={2}>Date of Birth*</Label>
               <Col sm={10}>
-                <Input type="date" name="dob" id="exampledob" placeholder=""  onChange={handleChange("dateOfBirth")}/>
+                <Input type="date" name="dob" value={dateOfBirth} id="exampledob" placeholder=""  onChange={handleChange("dateOfBirth")}/>
               </Col>
             </FormGroup>
             <FormGroup row className="mb-3">
               <Label for="examplePhone" sm={2}>Phone No</Label>
               <Col sm={10}>
-                <Input type="tel" name="phone" id="examplePhone" placeholder="" onChange={handleChange("phoneNo")} />
+                <Input type="tel" name="phone" value={phoneNo} id="examplePhone" placeholder="" onChange={handleChange("phoneNo")} />
               </Col>
             </FormGroup>
             <div id="center"><Button onClick={onSubmit} color="primary" size="lg">Submit</Button>{' '}</div>
