@@ -113,8 +113,6 @@ exports.isSignedIn = expressJwt({ secret: process.env.SECRET, algorithms: ['HS25
 
 // custom middlewares
 exports.isAuthenticated = (req, res, next) => {
-    console.log(req.profile, req.auth);
-    console.log(req.profile._id == req.auth._id)
     let checker = req.profile && req.auth && (req.profile._id == req.auth._id);
     if (!checker) {
         return res.status(403).json({
