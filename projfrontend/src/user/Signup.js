@@ -95,7 +95,61 @@ const Signup = () => {
           </div>}
           
           {userSignup === "Hospital Signup" && <div>
-            <input type="button" value="xyz" />
+          <FormGroup row className="mb-2 ">
+              <Label for="examplename" id="text-form" sm={2}>Hospital Name*</Label>
+              <Col sm={10}>
+                <Input type="name" name="name" id="examplename" placeholder="" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2 ">
+              <Label for="exampleadd1" id="text-form" sm={2}>Address Line1*</Label>
+              <Col sm={10}>
+                <Input type="name" name="name" id="exampleadd1" placeholder="eg-Building Name and Number" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2 ">
+              <Label for="exampleadd2" id="text-form" sm={2}>Address Line2*</Label>
+              <Col sm={10}>
+                <Input type="name" name="name" id="exampleadd2" placeholder="eg-City and District Name" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2 ">
+              <Label for="exampleadd3" id="text-form" sm={2}>Address Line3*</Label>
+              <Col sm={10}>
+                <Input type="name" name="name" id="exampleadd3" placeholder="eg-Nearby Landmark and Pincode" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2 ">
+              <Label for="examplereg" id="text-form" sm={2}>Registration Number*</Label>
+              <Col sm={10}>
+                <Input type="name" name="name" id="examplereg" placeholder="" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-3">
+              <Label for="examplePhone1" sm={2}>Phone No</Label>
+              <Col sm={10}>
+                <Input type="tel" name="phone" id="examplePhone1" placeholder="" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2">
+              <Label for="exampleEmailHosp" sm={2}>Email</Label>
+              <Col sm={10}>
+                <Input type="email" name="email" id="exampleEmailHosp" placeholder="eg-poojanpandya@gmail.com" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2">
+              <Label for="examplePasswordHosp" sm={2}>Password</Label>
+              <Col sm={10}>
+                <Input type="password" name="password" id="examplePasswordHosp" placeholder="" />
+              </Col>
+            </FormGroup>
+            <FormGroup row className="mb-2">
+              <Label for="examplePassword2Hosp" sm={2}>Confirm Password</Label>
+              <Col sm={10}>
+                <Input type="password" name="password2" id="examplePassword2Hosp" placeholder="" />
+              </Col>
+            </FormGroup>
+            <div id="center"><Button color="primary" size="lg">Submit</Button>{' '}</div>
           </div>}
 
         </Form>
