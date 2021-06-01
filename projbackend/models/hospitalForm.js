@@ -1,10 +1,16 @@
 var mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 var hospitalForm = new mongoose.Schema({
+    user: {
+        type: ObjectId,
+        ref: "User",
+        required: true
+    },
     doctorName: {
         type: String,
         required: true
-    },
+    },    
     disease: {
         type: String,
         required: true,

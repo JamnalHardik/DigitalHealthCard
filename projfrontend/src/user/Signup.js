@@ -2,8 +2,22 @@ import React from 'react'
 import '../styles.css'
 import { Form, FormGroup, Label, Input, FormText, Button ,Col} from 'reactstrap';
 
+import { signup } from '../auth/helper/index'
 
 const Signup = () => {
+  const [values, setValues] = useState({    
+    firstname: "",
+    lastname: "",
+    aadharNumber: "",
+    email: "",
+    password: "",
+    dateOfBirth: "",
+    error: "",
+    success: false
+  });
+  
+  const { firstname, lastName, aadharNumber, email, password, dateOfBirth, error, success } = values;
+
   const SignupForm = () => {
     return (
       <div>
