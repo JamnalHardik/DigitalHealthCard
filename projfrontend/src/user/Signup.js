@@ -1,67 +1,135 @@
 import React, { useState } from 'react'
 import '../styles.css'
 import { Form, FormGroup, Label, Input, FormText, Button, Col } from 'reactstrap';
-import { signup } from '../auth/helper'
+import { signupHospital, signupUser } from '../auth/helper'
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [values, setValues] = useState({
-    firstName: "Poojan",
-    lastName: "Pandya",
-    aadharNumber: "888866662323",
+    firstName: "",
+    lastName: "",
+    aadharNumber: "",
     email: "pandya@gmail.com",
-    password: "123456789",
+    password: "poojan1912",
+    password2: "poojan1912",
     dateOfBirth: "",
     phoneNo: "7016544608",
     error: "",
     success: false,
-    userSignup: "User Signup",
-    role: 0
+    userRole: "User",
+    hospitalName: "Shalby Hospital",
+    address: "6 Deepsagar",
+    registrationNumber: "85656465456"
   });
 
 
-  const { firstName, lastName, aadharNumber, email, password, dateOfBirth, error, success, userSignup, phoneNo, role } = values;
+  const {
+    firstName,
+    lastName,
+    aadharNumber,
+    email,
+    password,
+    dateOfBirth,
+    password2,
+    error,
+    success,
+    userRole,
+    phoneNo,
+    hospitalName,
+    address,
+    registrationNumber } = values;
 
-  const handleSelect = name => event => {   
-    setValues({ ...values, userSignup: event.target.value })
+
+  const handleSelect = name => event => {
+    setValues({ ...values, userRole: event.target.value })
   }
 
   const handleChange = name => event => {
     setValues({ ...values, error: false, [name]: event.target.value })
   }
 
-  // const handleChange
-
   const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: false })
-    signup({ firstName, lastName, aadharNumber, email, password, dateOfBirth, phoneNo, role })
-      .then(data => {
-        console.log(data);
-        if (data.error) {
-          console.log(data.error);
-          setValues({ ...values, error: data.error, success: false })
-        } else {
-          setValues({
-            ...values,
-            firstName: "",
-            lastName: "",
-            aadharNumber: "",
-            email: "",
-            password: "",
-            dateOfBirth: "",
-            phoneNo: "",
-            error: "",
-            success: true
-          });
-        }
-      });
+    if (password === password2) {
+      signupUser({ firstName, lastName, aadharNumber, email, password, dateOfBirth, phoneNo, userRole })
+        .then(data => {
+          console.log(data);
+          if (data.error) {
+            console.log(data.error);
+            setValues({ ...values, error: data.error, success: false })
+          } else {
+            setValues({
+              ...values,
+              firstName: "",
+              lastName: "",
+              aadharNumber: "",
+              email: "",
+              password: "",
+              password2: "",
+              dateOfBirth: "",
+              phoneNo: "",
+              error: "",
+              success: true
+            })
+          }
+        })
+        .catch(console.log("Error in signup"));
+    } else {
+      alert("Password Does not match.")
+      setValues({ ...values, password2: "" })
+    }
+  }
+
+  const onSubmitHospital = event => {
+    event.preventDefault();
+    setValues({ ...values, error: false })
+    if (password === password2) {
+
+      signupHospital({ hospitalName, address, registrationNumber, email, password, dateOfBirth, phoneNo, userRole })
+        .then(data => {
+          // console.log(data);
+          if (data.error) {
+            console.log(data.error);
+            setValues({ ...values, error: data.error, success: false })
+          } else {
+            setValues({
+              ...values,
+              hospitalName: "",
+              address: "",
+              registrationNumber: "",
+              email: "",
+              password: "",
+              password2: "",
+              dateOfBirth: "",
+              phoneNo: "",
+              error: "",
+              success: true
+            });
+          }
+        });
+    } else {
+      alert("Password Does not match.")
+      setValues({ ...values, password2: "" })
+    }
   }
 
   const errorMessage = () => {
     return (
       <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">          
+        <div className="col-md-6 offset-sm-3 text-left">
           <div className="alert alert-danger" style={{ display: error ? "" : "none" }}> {error} </div>
+        </div>
+      </div>
+    )
+
+  }
+
+  const successMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+          <div className="alert alert-success" style={{ display: success ? "" : "none" }}>New Account create successfully. Please <Link to="/">Login Here</Link> </div>
         </div>
       </div>
     )
@@ -80,12 +148,12 @@ const Signup = () => {
             <Label for="exampleSelect" sm={2}>Category</Label>
             <Col sm={10}>
               <Input type="select" name="select" id="exampleSelect" onChange={handleSelect()}>
-                <option id="user">User Signup</option>
-                <option id="hospital">Hospital Signup</option>
+                <option id="user">User</option>
+                <option id="hospital">Hospital</option>
               </Input>
             </Col>
           </FormGroup>
-          {(userSignup === "User Signup") && <div>
+          {(userRole === "User") && <div>
             <FormGroup row className="mb-2">
               <Label for="examplefirstname" sm={2}>First Name*</Label>
               <Col sm={10}>
@@ -119,13 +187,13 @@ const Signup = () => {
             <FormGroup row className="mb-2">
               <Label for="examplePassword2" sm={2}>Confirm Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password2" id="examplePassword2" placeholder="" />
+                <Input type="password" name="password2" value={password2} id="examplePassword2" placeholder="" onChange={handleChange("password2")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="exampledob" sm={2}>Date of Birth*</Label>
               <Col sm={10}>
-                <Input type="date" name="dob" value={dateOfBirth} id="exampledob" placeholder=""  onChange={handleChange("dateOfBirth")}/>
+                <Input type="date" name="dob" value={dateOfBirth} id="exampledob" placeholder="" onChange={handleChange("dateOfBirth")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-3">
@@ -137,17 +205,17 @@ const Signup = () => {
             <div id="center"><Button onClick={onSubmit} color="primary" size="lg">Submit</Button>{' '}</div>
           </div>}
 
-          {userSignup === "Hospital Signup" && <div>
-          <FormGroup row className="mb-2 ">
+          {userRole === "Hospital" && <div>
+            <FormGroup row className="mb-2 ">
               <Label for="examplename" id="text-form" sm={2}>Hospital Name*</Label>
               <Col sm={10}>
-                <Input type="name" name="name" id="examplename" placeholder="" />
+                <Input type="name" onChange={handleChange("hospitalName")} value={hospitalName} name="name" id="examplename" placeholder="" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2 ">
               <Label for="exampleadd1" id="text-form" sm={2}>Address Line1*</Label>
               <Col sm={10}>
-                <Input type="name" name="name" id="exampleadd1" placeholder="eg-Building Name and Number" />
+                <Input type="name" onChange={handleChange("address")} value={address} name="name" id="exampleadd1" placeholder="eg-Building Name and Number" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2 ">
@@ -165,34 +233,34 @@ const Signup = () => {
             <FormGroup row className="mb-2 ">
               <Label for="examplereg" id="text-form" sm={2}>Registration Number*</Label>
               <Col sm={10}>
-                <Input type="name" name="name" id="examplereg" placeholder="" />
+                <Input type="name" onChange={handleChange("registrationNumber")} value={registrationNumber} name="name" id="examplereg" placeholder="" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-3">
               <Label for="examplePhone1" sm={2}>Phone No</Label>
               <Col sm={10}>
-                <Input type="tel" name="phone" id="examplePhone1" placeholder="" />
+                <Input type="tel" onChange={handleChange("phoneNo")} value={phoneNo} name="phone" id="examplePhone1" placeholder="" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="exampleEmailHosp" sm={2}>Email</Label>
               <Col sm={10}>
-                <Input type="email" name="email" id="exampleEmailHosp" placeholder="eg-poojanpandya@gmail.com" />
+                <Input type="email" onChange={handleChange("email")} value={email} name="email" id="exampleEmailHosp" placeholder="eg-poojanpandya@gmail.com" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
               <Label for="examplePasswordHosp" sm={2}>Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password" id="examplePasswordHosp" placeholder="" />
+                <Input type="password" onChange={handleChange("password")} value={password} name="password" id="examplePasswordHosp" placeholder="" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2 mt-2">
               <Label for="examplePassword2Hosp" sm={2}>Confirm Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password2" id="examplePassword2Hosp" className="mt-2" placeholder="" />
+                <Input type="password" onChange={handleChange("password2")} value={password2} name="password2" id="examplePassword2Hosp" className="mt-2" placeholder="" />
               </Col>
             </FormGroup>
-            <div id="center"><Button color="primary" size="lg">Submit</Button>{' '}</div>
+            <div id="center"><Button color="primary" onClick={onSubmitHospital} size="lg">Submit</Button>{' '}</div>
           </div>}
 
         </Form>
@@ -202,8 +270,9 @@ const Signup = () => {
 
   return (
     <div>
-      {errorMessage()} 
       {SignupForm()}
+      {errorMessage()}
+      {successMessage()}
     </div>
   )
 }

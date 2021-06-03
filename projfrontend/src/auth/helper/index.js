@@ -1,14 +1,30 @@
 import { API } from "../../backend";
 
-export const signup = user => {
-    return fetch("http://localhost:8000/api/signup", {
+export const signupUser = user => {    
+    return fetch("http://localhost:8000/api/user/signup", {
         method: "POST",
 
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
         },        
-        body: JSON.stringify(user)        
+        body: JSON.stringify(user)                
+    })
+        .then(response => {
+            return response.json();
+        })        
+        .catch(err => console.log(err))
+}
+
+export const signupHospital = user => {    
+    return fetch("http://localhost:8000/api/hospital/signup", {
+        method: "POST",
+
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },        
+        body: JSON.stringify(user)                
     })
         .then(response => {
             return response.json();

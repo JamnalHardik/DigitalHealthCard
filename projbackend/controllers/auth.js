@@ -10,8 +10,8 @@ exports.signup = (req, res) => {
         return res.status(422).json({
             error: errors.array()[0].msg
         });
-    }    
-    if (req.body.role == 0) {
+    }
+    if (req.body.userRole == "User") {
         const user = new User(req.body);
         user.save((err, user) => {
             if (err) {
@@ -23,12 +23,13 @@ exports.signup = (req, res) => {
                 user
             });
         });
-    } else {
+    }
+    if (req.body.userRole == "Hospital") {
         const hospital = new Hospital(req.body);
         hospital.save((err, hospital) => {
             if (err) {
                 return res.status(400).json({
-                    err: "Not able to save user in DB"
+                    err: "Not able to save user in Database"
                 });
             }
             res.json({
@@ -47,7 +48,7 @@ exports.signin = (req, res) => {
             error: errors.array()[0].msg
         });
     }
-    if (role == 0) {
+    if (userRole == "User") {
         User.findOne({ email }, (err, user) => {
             if (err) {
                 return res.status(400).json({
@@ -73,7 +74,7 @@ exports.signin = (req, res) => {
             });
         });
     }
-    else {
+    if (userRole == "Hospital") {
         Hospital.findOne({ email }, (err, hospital) => {
             if (err) {
                 return res.status(400).json({

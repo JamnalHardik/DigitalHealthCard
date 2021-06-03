@@ -3,25 +3,62 @@ var router = express.Router();
 const { signup, signin, signout, isSignedIn } = require("../controllers/auth");
 const { check } = require('express-validator');
 
-router.post("/signup",
+router.post("/hospital/signup",
     [
-        check('email').isEmail().withMessage({
-            message: 'Please check your email'
-        }),
+        check('email')
+            .notEmpty()
+            .withMessage('Email is required.')
+            .isEmail()
+            .withMessage('Please check your email'),
         check('password')
+            .notEmpty()
+            .withMessage("Password is required.")
             .isLength({ min: 5 })
-            .withMessage('must be at least 5 chars long')
+            .withMessage('Password must be atleast 5 characters long.'),
+        check('hospitalName')
+            .notEmpty()
+            .withMessage('Hospital Name is required.'),
+        check('phoneNo')
+            .notEmpty()
+            .withMessage('Phone Number is required.'),
+        check('registrationNumber')
+            .notEmpty()
+            .withMessage('Registration Number is required.'),
+        check('address')
+            .notEmpty()
+            .withMessage('Address is required.'),
     ]
     , signup);
 
+router.post("/user/signup",
+    [
+        check('email')
+            .isEmail()
+            .withMessage('Please check your email'),
+        check('password')
+            .notEmpty()
+            .withMessage("Password is required.")
+            .isLength({ min: 5 })
+            .withMessage('Password must be atleast 5 characters long.'),
+        check('aadharNumber')
+            .notEmpty()
+            .withMessage("Aadhar Number is required.")
+            .isLength({ min: 12, max: 12 })
+            .withMessage('Aadhar Number must be 12 characters long.'),
+        check('firstName')
+            .notEmpty()
+            .withMessage('First Name is required.'),
+        check('dateOfBirth')
+            .notEmpty()
+            .withMessage('Date of Birth is required.')
+    ], signup);
+
 router.post("/signin",
     [
-        check('email').isEmail().withMessage({
-            message: 'Please check your email'
-        }),
+        check('email').isEmail().withMessage('Please check your email'),
         check('password')
             .isLength({ min: 5 })
-            .withMessage('must be at least 5 chars long')
+            .withMessage('must be at least 5 chars long'),
     ], signin)
 
 router.get("/signout", signout)

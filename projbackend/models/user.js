@@ -29,10 +29,9 @@ var userSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    role: {
-        type: Number,
-        required: true,
-        default: 0
+    userRole: {
+        type: String,
+        required: true        
     },
     phoneNo: Number        
 });
