@@ -55,8 +55,14 @@ router.post("/user/signup",
 
 router.post("/signin",
     [
-        check('email').isEmail().withMessage('Please check your email'),
+        check('email')
+            .notEmpty()
+            .withMessage('Email is required.')
+            .isEmail()
+            .withMessage('Please check your Email.'),
         check('password')
+            .notEmpty()
+            .withMessage('Password is required.')
             .isLength({ min: 5 })
             .withMessage('must be at least 5 chars long'),
     ], signin)

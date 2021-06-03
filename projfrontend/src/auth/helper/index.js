@@ -33,7 +33,7 @@ export const signupHospital = user => {
 }
 
 export const signin = user => {
-    return fetch(`${API}/signin`, {
+    return fetch("http://localhost:8000/api/signin", {
         method: "POST",
         headers: {
             Accept: "application/json",
