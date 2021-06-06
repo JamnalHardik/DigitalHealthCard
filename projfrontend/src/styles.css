@@ -75,3 +75,10 @@ label{
     margin-top: 20px;
     text-align: center;
 }
+#container{
+    max-width: 300px;
+
+}
+#bcontent {
+    margin-top: 10px;
+}
