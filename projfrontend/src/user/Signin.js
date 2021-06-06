@@ -144,6 +144,7 @@ const Signin = () => {
     <div>
       {SignInForm()}
       {errorMessage()}
+      {performRedirect()}
     </div>
   )
 }
