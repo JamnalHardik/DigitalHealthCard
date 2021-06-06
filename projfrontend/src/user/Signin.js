@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../styles.css'
+import '../sign.css'
 import { Link, Redirect } from 'react-router-dom'
 import { Form, FormGroup, Label, Input, FormText, Button, Col } from 'reactstrap';
 import { signin, authenticate, isAuthenticated } from '../auth/helper'

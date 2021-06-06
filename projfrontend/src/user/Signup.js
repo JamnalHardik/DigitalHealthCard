@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../styles.css'
+import '../sign.css'
 import { Form, FormGroup, Label, Input, FormText, Button, Col } from 'reactstrap';
 import { signupHospital, signupUser } from '../auth/helper'
 import { Link } from 'react-router-dom';
@@ -139,7 +140,7 @@ const Signup = () => {
 
   const SignupForm = () => {
     return (
-      <div>
+      <div >
         <div id="header-main">
           <h1>Digital Health Card</h1>
         </div>

@@ -1,43 +1,69 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
+// import "../styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import '../styles.css'
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import Link from "react-router-dom";
+import Navbar from "../core/Navbar";
+import { Table } from "reactstrap";
 const UserUI = () => {
+  const healthCard = () => {
+    return (
+      <div>
+        <div id="header-main" className="mb-5">
+          <h2>Health Card</h2>
+        </div>
+        <Table hover  className="container table table-bordered">
+          <thead className="text-light" style={{backgroundColor:'#8e2de2'}}>
+            <tr>
+              <th>No.</th>
+              <th>Hospital Name</th>
+              <th>Doctor Name</th>
+              <th>Diagnosis</th>
+              <th>Discharge Date</th>
+              <th>  
+               Detailed Report  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Hardik</td>
+              <td><button className="btn btn-success">Download  <FontAwesomeIcon
+              className="text-white"
+              icon={faFilePdf}
+              size="1x"
+            /></button></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Hardik</td>
+              <td>Hardik</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">Larry the Bird</td>
+              <td>@twitter</td>
+              <td>Hardik</td>
+              <td>Hardik</td>
+            </tr>
+          </tbody>
+        </Table>
+      </div>
+    );
+  };
   return (
     <div>
-
-      <nav className="navbar bg-dark" style={{ width: 200 }}>
-
-
-
-        <div className="container-fluid" id="bcontent">
-          <ul className="navbar-nav" style={{ marginLeft: 20 }}>
-            <FontAwesomeIcon className="text-white" pull="right" icon={faUser} size="3x" />
-            <li className="nav-item">
-              <h6 className="text-light nav-link">Welcome, Poojan</h6>
-            </li>
-            <hr className="text-white" />
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#">Health Card</a>
-            </li>            
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#">Reports</a>
-            </li>            
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#">DashBoard </a>
-            </li>            
-            <div style={{marginBottom: 150}}></div>
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#">Signout</a>
-            </li>
-          </ul>
-        </div>
-
-      </nav>
-
+      <Navbar />
+      {healthCard()}
     </div>
-  )
-}
+  );
+};
 
-export default UserUI
+export default UserUI;
