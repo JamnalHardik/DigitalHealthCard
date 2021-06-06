@@ -6,7 +6,8 @@ import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import Link from "react-router-dom";
 import Navbar from "../core/Navbar";
 import { Table } from "reactstrap";
-const UserUI = () => {
+
+const HealthCard = () => {
   const healthCard = () => {
     return (
       <div>
@@ -66,4 +67,4 @@ const UserUI = () => {
   );
 };
 
-export default UserUI;
+export default HealthCard;
