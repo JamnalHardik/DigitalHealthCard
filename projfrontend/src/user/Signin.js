@@ -32,7 +32,7 @@ const Signin = () => {
       if (user && user.userRole === "User") {
         return <Redirect to="/user/healthcard" />
       } else {
-        return <p>Redirect to hospital</p>
+        return <Redirect to="/hospital/dashboard" />
       }
     }
 
