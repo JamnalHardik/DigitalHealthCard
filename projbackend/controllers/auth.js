@@ -25,13 +25,16 @@ exports.signup = (req, res) => {
         });
     }
     if (req.body.userRole == "Hospital") {
-        const hospital = new Hospital(req.body);
+        const hospital = new Hospital(req.body); 
+        console.log(hospital);       
         hospital.save((err, hospital) => {
+            console.log(err);
             if (err) {
-                return res.status(400).json({
+                return res.status(400).json({                    
                     err: "Not able to save user in Database"
                 });
             }
+            console.log(err);
             res.json({
                 hospital
             });
@@ -43,6 +46,7 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
     const errors = validationResult(req);
     const { email, password, userRole } = req.body;
+    console.log(req.body);
     if (!errors.isEmpty()) {
         return res.status(422).json({
             error: errors.array()[0].msg
@@ -96,7 +100,7 @@ exports.signin = (req, res) => {
             //send response to front end
             const { _id, firstName, email, aadharNumber } = hospital;
             return res.json({
-                token, hospital: { _id, firstName, email, aadharNumber }
+                token, hospital: { _id, firstName, email, aadharNumber, userRole }
             });
         });
     }

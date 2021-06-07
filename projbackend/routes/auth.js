@@ -18,7 +18,7 @@ router.post("/hospital/signup",
         check('hospitalName')
             .notEmpty()
             .withMessage('Hospital Name is required.'),
-        check('phoneNo')
+        check('mobileNumber')
             .notEmpty()
             .withMessage('Phone Number is required.'),
         check('registrationNumber')

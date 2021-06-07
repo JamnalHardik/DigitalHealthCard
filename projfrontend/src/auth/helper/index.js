@@ -19,7 +19,6 @@ export const signupUser = user => {
 export const signupHospital = user => {    
     return fetch("http://localhost:8000/api/hospital/signup", {
         method: "POST",
-
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"

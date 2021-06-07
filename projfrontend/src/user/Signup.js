@@ -10,17 +10,17 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     aadharNumber: "",
-    email: "pandya@gmail.com",
-    password: "poojan1912",
-    password2: "poojan1912",
+    email: "hardik@gmail.com",
+    password: "hardik123",
+    password2: "hardik123",
     dateOfBirth: "",
-    phoneNo: "7016544608",
+    mobileNumber: 7016554608,
     error: "",
     success: false,
     userRole: "User",
-    hospitalName: "Shalby Hospital",
-    address: "6 Deepsagar",
-    registrationNumber: "85656465456"
+    hospitalName: "XYZ Hospital",
+    address: "7 Deepsagar",
+    registrationNumber: 87656465456
   });
 
 
@@ -35,7 +35,7 @@ const Signup = () => {
     error,
     success,
     userRole,
-    phoneNo,
+    mobileNumber,
     hospitalName,
     address,
     registrationNumber } = values;
@@ -53,7 +53,7 @@ const Signup = () => {
     event.preventDefault();
     setValues({ ...values, error: false })
     if (password === password2) {
-      signupUser({ firstName, lastName, aadharNumber, email, password, dateOfBirth, phoneNo, userRole })
+      signupUser({ firstName, lastName, aadharNumber, email, password, dateOfBirth, mobileNumber, userRole })
         .then(data => {
           console.log(data);
           if (data.error) {
@@ -69,7 +69,7 @@ const Signup = () => {
               password: "",
               password2: "",
               dateOfBirth: "",
-              phoneNo: "",
+              mobileNumber: "",
               error: "",
               success: true
             })
@@ -87,7 +87,7 @@ const Signup = () => {
     setValues({ ...values, error: false })
     if (password === password2) {
 
-      signupHospital({ hospitalName, address, registrationNumber, email, password, dateOfBirth, phoneNo, userRole })
+      signupHospital({ hospitalName, address, registrationNumber, email, password, dateOfBirth, mobileNumber, userRole })
         .then(data => {
           // console.log(data);
           if (data.error) {
@@ -103,7 +103,7 @@ const Signup = () => {
               password: "",
               password2: "",
               dateOfBirth: "",
-              phoneNo: "",
+              mobileNumber: "",
               error: "",
               success: true
             });
@@ -200,7 +200,7 @@ const Signup = () => {
             <FormGroup row className="mb-3">
               <Label for="examplePhone" sm={2}>Phone No</Label>
               <Col sm={10}>
-                <Input type="tel" name="phone" value={phoneNo} id="examplePhone" placeholder="" onChange={handleChange("phoneNo")} />
+                <Input type="tel" name="phone" value={mobileNumber} id="examplePhone" placeholder="" onChange={handleChange("mobileNumber")} />
               </Col>
             </FormGroup>
             <div id="center"><Button onClick={onSubmit} color="primary" size="lg">Submit</Button>{' '}</div>
@@ -240,7 +240,7 @@ const Signup = () => {
             <FormGroup row className="mb-3">
               <Label for="examplePhone1" sm={2}>Phone No</Label>
               <Col sm={10}>
-                <Input type="tel" onChange={handleChange("phoneNo")} value={phoneNo} name="phone" id="examplePhone1" placeholder="" />
+                <Input type="tel" onChange={handleChange("mobileNumber")} value={mobileNumber} name="phone" id="examplePhone1" placeholder="" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">

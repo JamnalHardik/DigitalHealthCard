@@ -5,7 +5,6 @@ import Signup from './user/Signup'
 import Signin from './user/Signin'
 import HealthCard from './facility/HealthCard'
 import UserRoute from './auth/helper/UserRoute'
-import HospitalRoute from './auth/helper/HospitalRoute'
 
 const Routes = () => {
     return (

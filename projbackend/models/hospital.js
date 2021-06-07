@@ -17,11 +17,7 @@ var hospitalSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    phoneNo: {
-        type: Number,
-        required: true,
-        unique: true
-    },
+    mobileNumber: Number,    
     email: {
         type: String,
         unique: true,
