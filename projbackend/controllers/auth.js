@@ -18,23 +18,6 @@ exports.signup = (req, res) => {
         return res.status(400).json({
           err: "Not able to save user in DB",
         });
-<<<<<<< HEAD
-    }
-    if (req.body.userRole == "Hospital") {
-        const hospital = new Hospital(req.body); 
-        console.log(hospital);       
-        hospital.save((err, hospital) => {
-            console.log(err);
-            if (err) {
-                return res.status(400).json({                    
-                    err: "Not able to save user in Database"
-                });
-            }
-            console.log(err);
-            res.json({
-                hospital
-            });
-=======
       }
       res.json({
         user,
@@ -47,7 +30,6 @@ exports.signup = (req, res) => {
       if (err) {
         return res.status(400).json({
           err: "Not able to save user in Database",
->>>>>>> 5991cbd2266abf1251b019500e972b02ab2f2874
         });
       }
       res.json({
@@ -58,14 +40,6 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-<<<<<<< HEAD
-    const errors = validationResult(req);
-    const { email, password, userRole } = req.body;
-    console.log(req.body);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({
-            error: errors.array()[0].msg
-=======
   const errors = validationResult(req);
   const { email, password, userRole } = req.body;
   if (!errors.isEmpty()) {
@@ -78,7 +52,6 @@ exports.signin = (req, res) => {
       if (err) {
         return res.status(400).json({
           error: "User Email does not exist",
->>>>>>> 5991cbd2266abf1251b019500e972b02ab2f2874
         });
       }
 
@@ -120,16 +93,6 @@ exports.signin = (req, res) => {
       // put token in cookie
       res.cookie("token", token, { expire: new Date() + 9999 });
 
-<<<<<<< HEAD
-            //send response to front end
-            const { _id, firstName, email, aadharNumber } = hospital;
-            return res.json({
-                token, hospital: { _id, firstName, email, aadharNumber, userRole }
-            });
-        });
-    }
-}
-=======
       //send response to front end
       const { _id, firstName, email, aadharNumber } = hospital;
       return res.json({
@@ -139,7 +102,6 @@ exports.signin = (req, res) => {
     });
   }
 };
->>>>>>> 5991cbd2266abf1251b019500e972b02ab2f2874
 
 exports.signout = (req, res) => {
   res.clearCookie("token");
