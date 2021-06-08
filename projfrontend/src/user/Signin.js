@@ -7,8 +7,8 @@ import { signin, authenticate, isAuthenticated } from '../auth/helper'
 
 const Signin = () => {
   const [values, setValues] = useState({
-    email: "pandyajignesh125@gmail.com",
-    password: "jignesh123",
+    email: "",
+    password: "",
     error: "",
     didRedirect: false,
     userRole: "User"
@@ -16,7 +16,7 @@ const Signin = () => {
 
 
   const { email, password, error, didRedirect, userRole } = values;
-  const { user } = isAuthenticated();
+  const { user, hospital } = isAuthenticated();
 
   const handleSelect = name => event => {
     setValues({ ...values, userRole: event.target.value })
@@ -27,18 +27,21 @@ const Signin = () => {
     setValues({ ...values, error: false, [name]: event.target.value })
   }
 
-  const performRedirect = () => {    
+  const performRedirect = () => {
     if (didRedirect) {
-      if (user && user.userRole === "User") {
-        return <Redirect to="/user/healthcard" />
-      } else {
+      console.log(hospital);
+      // if (user && user.userRole === "User") {
+      //   return <Redirect to="/user/healthcard" />
+      // }
+      if (hospital.userRole === "Hospital") {
+        console.log(hospital.userRole === "Hospital");
         return <Redirect to="/hospital/dashboard" />
       }
     }
 
-    if (isAuthenticated()) {
-      return <Redirect to="/" />
-    }
+    // if (isAuthenticated()) {
+    //   return <Redirect to="/" />
+    // }
   }
 
   const onSubmit = event => {
@@ -71,6 +74,7 @@ const Signin = () => {
           authenticate(data, () => {
             setValues({
               ...values,
+              userRole: "Hospital",
               didRedirect: true,
             })
           })
@@ -98,8 +102,8 @@ const Signin = () => {
           </div>
           <FormGroup row className="mb-2">
             <Label for="exampleSelect" sm={2}>Category</Label>
-            <Col sm={10} style={{padding: 6}} className="d-flex justify-content-center">
-              <select name="select" id="exampleSelect" onChange={handleSelect()} style={{width:200, height: 30}} autoFocus>
+            <Col sm={10} style={{ padding: 6 }} className="d-flex justify-content-center">
+              <select name="select" id="exampleSelect" onChange={handleSelect()} style={{ width: 200, height: 30 }} autoFocus>
                 <option id="user">User</option>
                 <option id="hospital">Hospital</option>
               </select>

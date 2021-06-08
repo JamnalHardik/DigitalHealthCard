@@ -27,7 +27,7 @@ const Navbar = ({ history }) => {
             size="2x"
           />
           <li className="nav-item" style={{ marginRight: 800 }}>
-            <h6 className="text-light nav-link">{isAuthenticated().user.firstName}</h6>
+            <h6 className="text-light nav-link">{isAuthenticated().hospital.hospitalName}</h6>
           </li>
           <li>
           <form className="d-flex">
@@ -37,7 +37,7 @@ const Navbar = ({ history }) => {
       </li>
           <li className="nav-item" style={{padding: 8, cursor: "pointer"}}>
             <span 
-            style={currentTab(history, "/user/dashboard")}
+            style={currentTab(history, "/hospital/dashboard")}
               onClick={() => {
                 signout(() => {
                   history.push("/");

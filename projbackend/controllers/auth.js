@@ -96,10 +96,10 @@ exports.signin = (req, res) => {
       res.cookie("token", token, { expire: new Date() + 9999 });
 
       //send response to front end
-      const { _id, firstName, email, aadharNumber } = hospital;
+      const { _id, hospitalName, email, registrationNumber } = hospital;
       return res.json({
         token,
-        hospital: { _id, firstName, email, aadharNumber, userRole },
+        hospital: { _id, email, userRole, hospitalName, registrationNumber},
       });
     });
   }
