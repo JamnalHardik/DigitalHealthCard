@@ -35,20 +35,18 @@ const Signin = () => {
   };
 
   const performRedirect = () => {
-    if (didRedirect) {
-      console.log(hospital);
-      // if (user && user.userRole === "User") {
-      //   return <Redirect to="/user/healthcard" />
-      // }
-      if (hospital.userRole === "Hospital") {
-        console.log(hospital.userRole === "Hospital");
+    if (didRedirect) {      
+      if (user && user.userRole === "User") {
+        return <Redirect to="/user/healthcard" />
+      }
+      if (hospital && hospital.userRole === "Hospital") {        
         return <Redirect to="/hospital/dashboard" />
       }
     }
 
-    // if (isAuthenticated()) {
-    //   return <Redirect to="/" />
-    // }
+    if (isAuthenticated()) {
+      return <Redirect to="/" />
+    }
   }
 
   const onSubmit = (event) => {
