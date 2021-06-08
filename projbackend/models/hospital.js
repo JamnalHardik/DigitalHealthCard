@@ -17,7 +17,7 @@ var hospitalSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    mobileNumber: Number,    
+    mobileNumber: Number,
     email: {
         type: String,
         unique: true,
@@ -30,7 +30,7 @@ var hospitalSchema = new mongoose.Schema({
     },
     userRole: {
         type: String,
-        required: true    
+        required: true
     },
     salt: String
 })
