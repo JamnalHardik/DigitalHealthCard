@@ -49,7 +49,7 @@ exports.signin = (req, res) => {
   }
   if (userRole == "User") {
     User.findOne({ email }, (err, user) => {
-      if (err) {
+      if (err || !user) {
         return res.status(400).json({
           error: "User Email does not exist",
         });
@@ -76,7 +76,7 @@ exports.signin = (req, res) => {
   }
   if (userRole == "Hospital") {
     Hospital.findOne({ email }, (err, hospital) => {
-      if (err) {
+      if (err || !hospital) {
         return res.status(400).json({
           error: "User Email does not exist",
         });

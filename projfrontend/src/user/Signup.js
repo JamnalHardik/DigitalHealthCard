@@ -148,10 +148,10 @@ const Signup = () => {
           <FormGroup row className="mb-2">
             <Label for="exampleSelect" sm={2}>Category</Label>
             <Col sm={10}>
-              <Input type="select" name="select" id="exampleSelect" onChange={handleSelect()}>
+              <select name="select" id="exampleSelect" onChange={handleSelect()} style={{width: 200, height: 30}} autoFocus>
                 <option id="user">User</option>
                 <option id="hospital">Hospital</option>
-              </Input>
+              </select>
             </Col>
           </FormGroup>
           {(userRole === "User") && <div>
