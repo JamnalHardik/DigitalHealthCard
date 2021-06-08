@@ -119,8 +119,8 @@ const Signup = () => {
     return (
 
       <div className="d-flex justify-content-center mt-2">
-      <div className="text-left text-center" style={{width:300}}>
-        <div className="alert" style={{ display: error ? "" : "none" , backgroundColor:'#E21717'}}> {error} </div>
+      <div className="text-left text-center" style={{width:400}}>
+        <div className="alert text-white" style={{ display: error ? "" : "none" , backgroundColor:'#E21717'}}> {error} </div>
       </div>
     </div>
     
@@ -130,9 +130,9 @@ const Signup = () => {
 
   const successMessage = () => {
     return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <div className="alert alert-success" style={{ display: success ? "" : "none" }}>New Account create successfully. Please <Link to="/">Login Here</Link> </div>
+      <div className="d-flex justify-content-center mt-2">
+      <div className="text-left text-center" style={{width:400}}>
+          <div className="alert alert-success text-white" style={{ display: success ? "" : "none" ,backgroundColor:'#6EC72D'}}>New Account create successfully. Please <Link to="/">Login Here</Link> </div>
         </div>
       </div>
     )
