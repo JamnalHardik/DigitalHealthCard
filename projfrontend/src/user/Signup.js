@@ -116,11 +116,13 @@ const Signup = () => {
 
   const errorMessage = () => {
     return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <div className="alert alert-danger" style={{ display: error ? "" : "none" }}> {error} </div>
-        </div>
+
+      <div className="d-flex justify-content-center mt-2">
+      <div className="text-left text-center" style={{width:300}}>
+        <div className="alert" style={{ display: error ? "" : "none" , backgroundColor:'#E21717'}}> {error} </div>
       </div>
+    </div>
+    
     )
 
   }
