@@ -26,7 +26,9 @@ exports.signup = (req, res) => {
   }
   if (req.body.userRole == "Hospital") {
     const hospital = new Hospital(req.body);
+    console.log(req.body);
     hospital.save((err, hospital) => {
+      console.log(err);
       if (err) {
         return res.status(400).json({
           err: "Not able to save user in Database",
@@ -94,10 +96,10 @@ exports.signin = (req, res) => {
       res.cookie("token", token, { expire: new Date() + 9999 });
 
       //send response to front end
-      const { _id, firstName, email, aadharNumber } = hospital;
+      const { _id, hospitalName, email, registrationNumber } = hospital;
       return res.json({
         token,
-        hospital: { _id, firstName, email, aadharNumber, userRole },
+        hospital: { _id, email, userRole, hospitalName, registrationNumber},
       });
     });
   }

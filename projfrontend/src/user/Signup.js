@@ -87,7 +87,7 @@ const Signup = () => {
     setValues({ ...values, error: false })
     if (password === password2) {
 
-      signupHospital({ hospitalName, address, registrationNumber, email, password, dateOfBirth, mobileNumber, userRole })
+      signupHospital({ hospitalName, address, registrationNumber, email, password, mobileNumber, userRole })
         .then(data => {
           // console.log(data);
           if (data.error) {
@@ -101,8 +101,7 @@ const Signup = () => {
               registrationNumber: "",
               email: "",
               password: "",
-              password2: "",
-              dateOfBirth: "",
+              password2: "",              
               mobileNumber: "",
               error: "",
               success: true

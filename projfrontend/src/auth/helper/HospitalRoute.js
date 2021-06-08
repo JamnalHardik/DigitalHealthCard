@@ -7,7 +7,7 @@ const HospitalRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={props=>
-          isAuthenticated() && isAuthenticated().user.userRole === "Hospital" ? (
+          isAuthenticated() && isAuthenticated().hospital.userRole === "Hospital" ? (
             <Component {...props} />
           ) : (
             <Redirect
