@@ -8,16 +8,10 @@ import {
   Button,
   Col,
 } from "reactstrap";
-<<<<<<< HEAD
-import { isAuthenticated } from "../auth/helper";
-
-import "../form.css";
-import { fillData, getUser } from "./helper/facilityapicall";
-
-=======
 import "../styles.css";
 import Navbar from "../core/Navbar_Hospital";
->>>>>>> e7d079330bdafd0c7649c82549d2c9fc6872566b
+import {isAuthenticated} from '../auth/helper/index';
+import {getUser, fillData} from './helper/facilityapicall'
 const HospitalForm = () => {
   const [values, setValues] = useState({
     hospitalName: "",
@@ -74,37 +68,6 @@ const HospitalForm = () => {
 
   return (
     <div>
-<<<<<<< HEAD
-      <Form style={{}}>
-        <div class="mb-3">
-          <label for="examplehospitalName" class="form-label">Hospital Name</label>
-          <input type="name" value={hospitalName} class="form-control" id="examplehospitalName" />
-        </div>
-        <div class="mb-3">
-          <label for="exampledoctorName" class="form-label">Doctor Name</label>
-          <input type="name" value={doctorName} class="form-control" id="exampledoctorName" />
-        </div>
-        <div className="mb-3">
-          <label for="exampledisease" class="form-label">Symptoms</label>
-          <input type="name" value={symptoms} class="form-control" id="examplesymptoms" />
-        </div>
-        <div class="mb-3">
-          <label for="exampledisease" class="form-label">Disease</label>
-          <input type="name" value={disease} class="form-control" id="exampledisease" />
-        </div>
-        <div class="mb-3">
-          <label for="exampledisease" class="form-label">Medicine</label>
-          <input type="name" value={medicine} class="form-control" id="examplemedicine" />
-        </div>
-        <div class="mb-3">
-          <label for="exampledisease" class="form-label">Discharge Date</label>
-          <input type="date" value={dischargeDate} class="form-control" id="exampledischargedate" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </Form>
-
-=======
       <Navbar />
     <Form className="container">
     <div className="mb-2">
@@ -136,7 +99,6 @@ const HospitalForm = () => {
   </div>
     </Form>
       
->>>>>>> e7d079330bdafd0c7649c82549d2c9fc6872566b
     </div>
   );
 };
