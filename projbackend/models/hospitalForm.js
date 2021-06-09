@@ -5,7 +5,7 @@ var hospitalForm = new mongoose.Schema({
   user: {
     type: ObjectId,
     ref: "User",
-    required: true,
+    required: true
   },
   hospitalName: {
     type: String, 
@@ -23,7 +23,7 @@ var hospitalForm = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Symptoms: {
+  symptoms: {
     type: String,
     required: true,
   },

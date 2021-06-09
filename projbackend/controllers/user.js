@@ -14,6 +14,13 @@ exports.getUserById = (req, res, next, id) => {
     })
 }
 
+exports.getUser = (req, res) => {
+    req.profile.encryptedPassword = undefined;
+    req.profile.salt = undefined;
+    console.log(req.profile);    
+    res.json(req.profile);
+}
+
 exports.getAllUserForms = async (req, res) => {
     id = req.profile._id;
     aadharNumber = req.profile.aadharNumber;    
