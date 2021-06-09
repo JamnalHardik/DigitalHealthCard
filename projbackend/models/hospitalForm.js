@@ -7,6 +7,10 @@ var hospitalForm = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  hospitalName: {
+    type: String, 
+    required: true
+  },
   doctorName: {
     type: String,
     required: true,
@@ -19,13 +23,13 @@ var hospitalForm = new mongoose.Schema({
     type: String,
     required: true,
   },
-  medicineDose: {
+  Symptoms: {
     type: String,
     required: true,
   },
   dischargeDate: {
     type: Date,
-    required: true,
+    // required: true,
   },
 });
 
