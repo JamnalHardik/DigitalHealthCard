@@ -10,6 +10,8 @@ import {
 } from "reactstrap";
 import "../styles.css";
 import Navbar from "../core/Navbar_Hospital";
+import {isAuthenticated} from '../auth/helper/index';
+import {getUser, fillData} from './helper/facilityapicall'
 const HospitalForm = () => {
   const [values, setValues] = useState({
     hospitalName: "",
