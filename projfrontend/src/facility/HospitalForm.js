@@ -8,37 +8,40 @@ import {
   Button,
   Col,
 } from "reactstrap";
-import "../form.css";
+import "../styles.css";
+import Navbar from "../core/Navbar_Hospital";
 const HospitalForm = () => {
   return (
     <div>
-    <Form style={{}}>
-    <div class="mb-3">
-    <label for="examplehospitalName" class="form-label">Hospital Name</label>
-    <input type="name" class="form-control" id="examplehospitalName" />
+      <Navbar />
+    <Form className="container">
+    <div className="mb-2">
+    <label for="examplehospitalName" className="form-label">Hospital Name</label>
+    <input type="name" className="form-control" id="examplehospitalName" />
   </div>
-   <div class="mb-3">
-    <label for="exampledoctorName" class="form-label">Doctor Name</label>
-    <input type="name" class="form-control" id="exampledoctorName" />
+   <div className="mb-2">
+    <label for="exampledoctorName" className="form-label">Doctor Name</label>
+    <input type="name" className="form-control" id="exampledoctorName" />
   </div>
-  <div className="mb-3">
-  <label for="exampledisease" class="form-label">Symptoms</label>
-    <input type="name" class="form-control" id="examplesymptoms" />
+  <div className="mb-2">
+  <label for="exampledisease" className="form-label">Symptoms</label>
+    <input type="name" className="form-control" id="examplesymptoms" />
   </div>
-  <div class="mb-3">
-    <label for="exampledisease" class="form-label">Disease</label>
-    <input type="name" class="form-control" id="exampledisease" />
+  <div className="mb-2">
+    <label for="exampledisease" className="form-label">Disease</label>
+    <input type="name" className="form-control" id="exampledisease" />
   </div>
-  <div class="mb-3">
-    <label for="exampledisease" class="form-label">Medicine</label>
-    <input type="name" class="form-control" id="examplemedicine" />
+  <div className="mb-2">
+    <label for="exampledisease" className="form-label">Medicine</label>
+    <input type="name" className="form-control" id="examplemedicine" />
    </div>
-   <div class="mb-3">
-    <label for="exampledisease" class="form-label">Discharge Date</label>
-    <input type="date" class="form-control" id="exampledischargedate" />
+   <div className="mb-3">
+    <label for="exampledisease" className="form-label">Discharge Date</label>
+    <input type="date" className="form-control" id="exampledischargedate" />
    </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div  id="center">
+  <button type="submit" className="btn btn-primary">Submit</button>
+  </div>
     </Form>
       
     </div>
