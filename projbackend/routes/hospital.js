@@ -8,7 +8,8 @@ router.param("hospitalId", getHospitalById);
 router.param("userId", getUserById);
 // router.param("userId", getUserById);
 
-router.post("/hospital/:hospitalId", isSignedIn, isAuthenticated, fillData);
+router.post("/hospital/form/:hospitalId", isSignedIn, isAuthenticated, fillData);
 router.get("/hospital/users/:hospitalId", isSignedIn, isAuthenticated, getAllUsers);
+// router.get("/hospital/:hospitalId", getHospitalById);
 
 module.exports = router;

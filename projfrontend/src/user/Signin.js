@@ -37,6 +37,7 @@ const Signin = () => {
   const performRedirect = () => {
     if (didRedirect) {      
       if (user && user.userRole === "User") {
+        console.log(user);
         return <Redirect to="/user/healthcard" />
       }
       if (hospital && hospital.userRole === "Hospital") {        
@@ -54,6 +55,7 @@ const Signin = () => {
     setValues({ ...values, error: false });
     signin({ email, password, userRole })
       .then((data) => {
+        console.log(data);
         if (data.error) {
           setValues({ ...values, error: data.error });
         } else {
