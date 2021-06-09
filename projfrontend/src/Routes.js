@@ -7,6 +7,7 @@ import HealthCard from './facility/HealthCard'
 import UserRoute from './auth/helper/UserRoute'
 import HospitalRoute from './auth/helper/HospitalRoute'
 import HospitalUI from './facility/HospitalUI' 
+import HospitalForm from './facility/HospitalForm'
 
 const Routes = () => {
     return (
@@ -16,6 +17,7 @@ const Routes = () => {
                 <Route path="/" exact component={Signin} />                
                 <UserRoute path="/user/healthcard" exact component={HealthCard} />
                 <HospitalRoute path="/hospital/dashboard" exact component={HospitalUI} />
+                <HospitalRoute path="/hospital/form" exact component={HospitalForm} />
             </Switch>
         </Router>
     )
