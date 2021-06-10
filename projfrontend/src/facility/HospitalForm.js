@@ -24,9 +24,9 @@ const HospitalForm = () => {
     error: "",
     success: "",
     user: "",
-    aadhar: ""
+    aadharNumber: ""
   })
-  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadhar } = values;
+  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;
   const { hospital, token } = isAuthenticated();
 
   const handleChange = (name) => (event) => {
@@ -66,8 +66,8 @@ const HospitalForm = () => {
 
   const onSearch = (event) => {
     event.preventDefault();
-    console.log(aadhar);
-    getUserByAadhar(aadhar)
+    console.log(aadharNumber);
+    getUserByAadhar(aadharNumber)
       .then(data => {
         if (data.error) {
           setValues({ ...values, error: data.error })
@@ -108,7 +108,7 @@ const HospitalForm = () => {
         <Navbar />
         
         <Form className="container">          
-        <Main name="aadhar" handle={handleChange} aadhar={aadhar} />
+        <Main name="aadhar" handle={handleChange} aadharNumber={aadharNumber} />
           <div id="center">
             <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
           </div>
