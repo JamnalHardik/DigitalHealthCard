@@ -50,7 +50,10 @@ router.post("/user/signup",
             .withMessage('First Name is required.'),
         check('dateOfBirth')
             .notEmpty()
-            .withMessage('Date of Birth is required.')
+            .withMessage('Date of Birth is required.'),
+        check('mobileNumber')
+        .isLength({ min: 10, max: 10 })
+        .withMessage('Phone Number must be 10 characters long.'),    
     ], signup);
 
 router.post("/signin",

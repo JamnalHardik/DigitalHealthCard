@@ -16,6 +16,7 @@ exports.getHospitalById = async (req, res, next, id) => {
 
 exports.fillData = (req, res) => {
     const hospitalForm = new HospitalForm(req.body);
+    console.log(req.body);
     hospitalForm.save((err, hospitalForm) => {
         if (err) {
             return res.status(400).json({

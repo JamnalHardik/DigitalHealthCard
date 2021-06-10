@@ -45,3 +45,16 @@ exports.getAllUsers = (req, res) => {
         res.json(user);
     });
 }
+
+exports.getUserByAadhar = (req, res) => {    
+    aadharNumber = req.body.aadharNumber;    
+    User.findOne({aadharNumber}).exec((err, user) => {
+        if(err || !user){
+            return res.status(400).json({
+                message: "Could not find user by given aadhar number"
+            })
+        }
+            
+        res.json(user._id)
+    })
+}

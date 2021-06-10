@@ -20,7 +20,7 @@ exports.signup = (req, res) => {
         });
       }
       res.json({
-        user,
+        user
       });
     });
   }

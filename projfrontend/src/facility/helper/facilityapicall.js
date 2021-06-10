@@ -36,12 +36,17 @@ export const fillData = (hospitalId, token, hospital) => {
         .catch(err => console.log(err))
 }
 
-export const getUser = (userId) => {
-    return fetch(`http://localhost:8000/api/user/${userId}`, {
-        method: "GET"
+export const getUserByAadhar = (aadharNumber) => {
+    return fetch(`http://localhost:8000/api/user/aadhar`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
+        body: JSON.stringify({aadharNumber})
     })
-    .then(response => {
-        return response.json();
-    })
-    .catch(err => console.log(err))
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err))
 }
