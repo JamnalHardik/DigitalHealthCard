@@ -16,7 +16,7 @@ const currentTab = (history, path) => {
   }
 }
 
-const Navbar = ({ history }) => {
+const Navbar = ({history}) => {  
   const [values, setValues] = useState({
     user: "",
     error: "",

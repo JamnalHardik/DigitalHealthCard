@@ -12,6 +12,7 @@ import "../styles.css";
 import Navbar from "../core/Navbar_Hospital";
 import { isAuthenticated } from '../auth/helper/index';
 import { getUser, fillData, getUserByAadhar } from './helper/facilityapicall'
+import Main from "./Main";
 const HospitalForm = () => {
   const [values, setValues] = useState({
     hospitalName: "Shalby",
@@ -23,10 +24,9 @@ const HospitalForm = () => {
     error: "",
     success: "",
     user: "",
-    aadharNumber: ""
+    aadhar: ""
   })
-
-  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;
+  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadhar } = values;
   const { hospital, token } = isAuthenticated();
 
   const handleChange = (name) => (event) => {
@@ -66,8 +66,8 @@ const HospitalForm = () => {
 
   const onSearch = (event) => {
     event.preventDefault();
-    console.log(aadharNumber);
-    getUserByAadhar(aadharNumber)
+    console.log(aadhar);
+    getUserByAadhar(aadhar)
       .then(data => {
         if (data.error) {
           setValues({ ...values, error: data.error })
@@ -105,12 +105,10 @@ const HospitalForm = () => {
   const hospitalForm = () => {
     return (
       <div>
-        <Navbar aadharNumber="8888888888" />
-        <Form className="container">
-          <div className="mb-2">
-            <label for="aadharNumber" className="form-label">Aadhar Number</label>
-            <input type="name" value={aadharNumber} onChange={handleChange("aadharNumber")} className="form-control" id="aadharNumber" />
-          </div>
+        <Navbar />
+        
+        <Form className="container">          
+        <Main name="aadhar" handle={handleChange} aadhar={aadhar} />
           <div id="center">
             <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
           </div>
