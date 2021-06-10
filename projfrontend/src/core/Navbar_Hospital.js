@@ -53,15 +53,10 @@ const Navbar = ({history}) => {
             icon={faUser}
             size="2x"
           />
-          <li className="nav-item" style={{ marginRight: 800 }}>
+          <li className="nav-item" style={{ marginRight: 1100 }}>
             <h6 className="text-light nav-link">{isAuthenticated().hospital.hospitalName}</h6>
           </li>
-          <li>
-            <form className="d-flex">
-              <input className="form-control me-2" type="search" onChange={handleChange("aadharNumber")} value={aadharNumber} placeholder="Enter AadharNumber" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </li>
+         
           <li className="nav-item" style={{ padding: 8, cursor: "pointer" }}>
             <span
               style={currentTab(history, "/hospital/dashboard")}

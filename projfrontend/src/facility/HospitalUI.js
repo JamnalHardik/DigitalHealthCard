@@ -4,7 +4,7 @@ import { getAllUserForms, getUserByAadhar } from './helper/facilityapicall';
 import Moment from 'moment';
 import { Table } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { faFilePdf, faPen } from '@fortawesome/free-solid-svg-icons'
 import Main from './Main';
 import {
   Form,
@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import "../styles.css"
 import { isAuthenticated } from '../auth/helper';
+import { Link } from 'react-router-dom';
 const HospitalUI = () => {
   const [values, setValues] = useState({
     aadhar: "",
@@ -66,36 +67,47 @@ const HospitalUI = () => {
   const healthCard = () => {
     return (
       <div>
-          {healthTable && <Table hover className="container table table-bordered">
-          <thead className="text-light" style={{ backgroundColor: '#8e2de2' }}>
-            <tr>
-              <th>No.</th>
-              <th>Hospital Name</th>
-              <th>Doctor Name</th>
-              <th>Diagnosis</th>
-              <th>Discharge Date</th>
-              <th>
-                Detailed Report  </th>
-            </tr>
-          </thead>
-          <tbody>
-            {healthTable &&
-              healthTable.map((table, index) => (
-                <tr key={index} value={table._id}>
-                  <td>{index + 1}</td>
-                  <td>{table.hospitalName}</td>
-                  <td>{table.doctorName}</td>
-                  <td>{table.disease}</td>
-                  <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
-                  <td><button className="btn btn-success">Download  <FontAwesomeIcon
-                    className="text-white"
-                    icon={faFilePdf}
-                    size="1x" /></button></td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </Table>}
+       
+          {healthTable && 
+            <div> 
+            <Link to ="/hospital/form" ><button className="btn mb-2 text-light" style={{backgroundColor:'#207398', marginLeft:115}}> <FontAwesomeIcon
+                     className="text-white"
+                     icon={faPen}
+                     size="1x" />  Fill Form </button></Link>
+              <Table hover className="container table table-bordered">
+           
+            
+           <thead className="text-light" style={{ backgroundColor: '#8e2de2' }}>
+             <tr>
+               <th>No.</th>
+               <th>Hospital Name</th>
+               <th>Doctor Name</th>
+               <th>Diagnosis</th>
+               <th>Discharge Date</th>
+               <th>
+                 Detailed Report  </th>
+             </tr>
+           </thead>
+           <tbody>
+             {healthTable &&
+               healthTable.map((table, index) => (
+                 <tr key={index} value={table._id}>
+                   <td>{index + 1}</td>
+                   <td>{table.hospitalName}</td>
+                   <td>{table.doctorName}</td>
+                   <td>{table.disease}</td>
+                   <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
+                   <td><button className="btn btn-success">Download  <FontAwesomeIcon
+                     className="text-white"
+                     icon={faFilePdf}
+                     size="1x" /></button></td>
+                 </tr>
+               ))
+             }
+           </tbody>
+         </Table>
+            </div>
+           }
       </div>
     )
 

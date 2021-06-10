@@ -113,23 +113,23 @@ const HospitalForm = () => {
             <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
           </div>
           <div className="mb-2">
-            <label for="exampledoctorName" className="form-label">Doctor Name</label>
+            <label for="exampledoctorName" className="form-label">Doctor Name*</label>
             <input type="name" value={doctorName} onChange={handleChange("doctorName")} className="form-control" id="exampledoctorName" />
           </div>
           <div className="mb-2">
-            <label for="exampledisease" className="form-label">Symptoms</label>
+            <label for="exampledisease" className="form-label">Symptoms*</label>
             <input type="name" value={symptoms} onChange={handleChange("symptoms")} className="form-control" id="examplesymptoms" />
           </div>
           <div className="mb-2">
-            <label for="exampledisease" className="form-label">Disease</label>
+            <label for="exampledisease" className="form-label">Disease*</label>
             <input type="name" value={disease} onChange={handleChange("disease")} className="form-control" id="exampledisease" />
           </div>
           <div className="mb-2">
-            <label for="exampledisease" className="form-label">Medicine</label>
+            <label for="exampledisease" className="form-label">Medicine*</label>
             <input type="name" value={medicine} onChange={handleChange("medicine")} className="form-control" id="examplemedicine" />
           </div>
           <div className="mb-3">
-            <label for="exampledisease" className="form-label">Discharge Date</label>
+            <label for="exampledisease" className="form-label">Discharge Date*</label>
             <input type="date" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
           </div>
           <div id="center">
