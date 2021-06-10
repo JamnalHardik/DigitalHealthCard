@@ -24,10 +24,11 @@ const HospitalUI = () => {
     error: "",
     user: "",
     healthTable: "",
-    hospitalId: ""
+    hospitalId: "",
+    success: false
   })
-  const {hospital, token} = isAuthenticated();  
-  const { aadharNumber, error, user, healthTable, hospitalId } = values;
+  const { hospital, token } = isAuthenticated();
+  const { aadharNumber, error, user, healthTable, hospitalId, success } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   }
@@ -55,24 +56,24 @@ const HospitalUI = () => {
     await getUserByAadhar(aadharNumber)
       .then(async (data) => {
         if (data.error) {
-          setValues({ ...values, error: data.error, healthTable: "" })
+          setValues({ ...values, error: data.error, healthTable: "", success: false })
         } else {
           console.log(data);
-          setValues({ ...values, user: data, hospitalId: hospital._id })
+          setValues({ ...values, user: data, hospitalId: hospital._id, success: true })
           await preload(data)
         }
       })
   }
 
-  async function preload (userId) {
+  async function preload(userId) {
     console.log(user);
     await getAllUserForms(userId).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error })
       } else {
         console.log(data);
-        setValues({ ...values, healthTable: data, aadharNumber: "" });
-        // console.log(healthTable);
+        setValues({ ...values, healthTable: data, aadharNumber: "", success: true });
+        console.log(healthTable);
       }
     })
   }
@@ -84,47 +85,49 @@ const HospitalUI = () => {
   const healthCard = () => {
     return (
       <div>
-       
-          {healthTable && 
-            <div> 
-            <Link to ="/hospital/form" ><button className="btn mb-2 text-light" style={{backgroundColor:'#207398', marginLeft:115}}> <FontAwesomeIcon
-                     className="text-white"
-                     icon={faPen}
-                     size="1x" />  Fill Form </button></Link>
-              <Table hover className="container table table-bordered">
-           
-            
-           <thead className="text-light" style={{ backgroundColor: '#8e2de2' }}>
-             <tr>
-               <th>No.</th>
-               <th>Hospital Name</th>
-               <th>Doctor Name</th>
-               <th>Diagnosis</th>
-               <th>Discharge Date</th>
-               <th>
-                 Detailed Report  </th>
-             </tr>
-           </thead>
-           <tbody>
-             {healthTable &&
-               healthTable.map((table, index) => (
-                 <tr key={index} value={table._id}>
-                   <td>{index + 1}</td>
-                   <td>{table.hospitalName}</td>
-                   <td>{table.doctorName}</td>
-                   <td>{table.disease}</td>
-                   <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
-                   <td><button className="btn btn-success">Download  <FontAwesomeIcon
-                     className="text-white"
-                     icon={faFilePdf}
-                     size="1x" /></button></td>
-                 </tr>
-               ))
-             }
-           </tbody>
-         </Table>
-            </div>
-           }
+        <p style={{ display: (healthTable.length === 0 && success) ? "" : 'none' }} className="text-center text-secondary">Nothing to show</p>
+        <Link to="/hospital/form" >
+          <div id="center">
+            <button className="btn mb-2 text-light" style={{ backgroundColor: '#207398'}}> <FontAwesomeIcon
+              className="text-white"
+              icon={faPen}
+              size="1x" />  Fill Form </button>
+          </div>
+        </Link>        
+        {(healthTable.length !== 0) &&
+          <div>
+            <Table hover className="container table table-bordered">
+              <thead className="text-light" style={{ backgroundColor: '#8e2de2' }}>
+                <tr>
+                  <th>No.</th>
+                  <th>Hospital Name</th>
+                  <th>Doctor Name</th>
+                  <th>Diagnosis</th>
+                  <th>Discharge Date</th>
+                  <th>
+                    Detailed Report  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {healthTable &&
+                  healthTable.map((table, index) => (
+                    <tr key={index} value={table._id}>
+                      <td>{index + 1}</td>
+                      <td>{table.hospitalName}</td>
+                      <td>{table.doctorName}</td>
+                      <td>{table.disease}</td>
+                      <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
+                      <td><button className="btn btn-success">Download  <FontAwesomeIcon
+                        className="text-white"
+                        icon={faFilePdf}
+                        size="1x" /></button></td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </Table>
+          </div>
+        }
       </div>
     )
 

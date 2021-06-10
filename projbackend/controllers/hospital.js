@@ -27,7 +27,7 @@ exports.fillData = (req, res) => {
     hospitalForm.save((err, hospitalForm) => {
         if (err) {
             return res.status(400).json({
-                err: "Not able to save user in DB"
+                error: "Not able to save user in DB"
             });
         }
         res.json({
