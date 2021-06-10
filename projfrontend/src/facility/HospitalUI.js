@@ -19,25 +19,42 @@ import "../styles.css"
 import { isAuthenticated } from '../auth/helper';
 const HospitalUI = () => {
   const [values, setValues] = useState({
-    aadhar: "",
+    aadharNumber: "",
     error: "",
     user: "",
     healthTable: "",
     hospitalId: ""
   })
   const {hospital, token} = isAuthenticated();  
-  const { aadhar, error, user, healthTable, hospitalId } = values;
+  const { aadharNumber, error, user, healthTable, hospitalId } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   }
 
+  const errorMessage = () => {
+    return (
+      <div className="d-flex justify-content-center mt-2">
+        <div className="text-left text-center" style={{ width: 400 }}>
+          <div
+            className="alert text-white"
+            style={{ display: error ? "" : "none", backgroundColor: "#E21717" }}
+          >
+
+            {error}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+
   const onSearch = async (event) => {
     event.preventDefault();
-    console.log(aadhar);
-    await getUserByAadhar(aadhar)
+    console.log(aadharNumber);
+    await getUserByAadhar(aadharNumber)
       .then(async (data) => {
         if (data.error) {
-          setValues({ ...values, error: data.error })
+          setValues({ ...values, error: data.error, healthTable: "" })
         } else {
           console.log(data);
           setValues({ ...values, user: data, hospitalId: hospital._id })
@@ -53,7 +70,7 @@ const HospitalUI = () => {
         setValues({ ...values, error: data.error })
       } else {
         console.log(data);
-        setValues({ ...values, healthTable: data });
+        setValues({ ...values, healthTable: data, aadharNumber: "" });
         // console.log(healthTable);
       }
     })
@@ -105,11 +122,12 @@ const HospitalUI = () => {
     <div>
       <Navbar />
       <Form className="mb-5 container text-center" style={{ width: 500 }}>
-        <Main aadhar={aadhar} handle={handleChange} />
+        <Main aadharNumber={aadharNumber} handle={handleChange} />
         <div id="center">
           <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
         </div>
       </Form>
+      {errorMessage()}
       {healthCard()}
     </div>
   )

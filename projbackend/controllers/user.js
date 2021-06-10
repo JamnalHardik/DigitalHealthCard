@@ -1,6 +1,7 @@
 const HospitalForm = require("../models/hospitalForm");
 const User = require("../models/user");
 const Hospital = require("../models/hospital")
+const { validationResult } = require("express-validator");
 
 exports.getUserById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
@@ -47,6 +48,12 @@ exports.getAllUsers = (req, res) => {
 }
 
 exports.getUserByAadhar = (req, res) => {    
+    const errors = validationResult(req);    
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            error: errors.array()[0].msg,
+        });
+    }
     aadharNumber = req.body.aadharNumber;    
     User.findOne({aadharNumber}).exec((err, user) => {
         if(err || !user){
