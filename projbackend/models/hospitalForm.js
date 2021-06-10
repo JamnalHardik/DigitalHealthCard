@@ -29,7 +29,7 @@ var hospitalForm = new mongoose.Schema({
   },
   dischargeDate: {
     type: Date,
-    // required: true,
+    required: true,
   },
 });
 

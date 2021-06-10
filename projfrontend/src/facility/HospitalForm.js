@@ -27,7 +27,7 @@ const HospitalForm = () => {
   })
 
   const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;
-  const { hospital, token } = isAuthenticated()
+  const { hospital, token } = isAuthenticated();
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -48,8 +48,24 @@ const HospitalForm = () => {
   //   loadUser()
   // }, [])
 
+  const errorMessage = () => {
+    return (
+      <div className="d-flex justify-content-center mt-2">
+        <div className="text-left text-center" style={{ width: 400 }}>
+          <div
+            className="alert text-white"
+            style={{ display: error ? "" : "none", backgroundColor: "#E21717" }}
+          >
+
+            {error}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const onSearch = (event) => {
-    event.preventDefault();    
+    event.preventDefault();
     console.log(aadharNumber);
     getUserByAadhar(aadharNumber)
       .then(data => {
@@ -57,7 +73,7 @@ const HospitalForm = () => {
           setValues({ ...values, error: data.error })
         } else {
           console.log(data);
-          setValues({...values, user: data})
+          setValues({ ...values, user: data, hospitalName: hospital.hospitalName })
           console.log(user);
         }
 
@@ -86,48 +102,53 @@ const HospitalForm = () => {
       })
   }
 
+  const hospitalForm = () => {
+    return (
+      <div>
+        <Navbar aadharNumber="8888888888" />
+        <Form className="container">
+          <div className="mb-2">
+            <label for="aadharNumber" className="form-label">Aadhar Number</label>
+            <input type="name" value={aadharNumber} onChange={handleChange("aadharNumber")} className="form-control" id="aadharNumber" />
+          </div>
+          <div id="center">
+            <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
+          </div>
+          <div className="mb-2">
+            <label for="exampledoctorName" className="form-label">Doctor Name</label>
+            <input type="name" value={doctorName} onChange={handleChange("doctorName")} className="form-control" id="exampledoctorName" />
+          </div>
+          <div className="mb-2">
+            <label for="exampledisease" className="form-label">Symptoms</label>
+            <input type="name" value={symptoms} onChange={handleChange("symptoms")} className="form-control" id="examplesymptoms" />
+          </div>
+          <div className="mb-2">
+            <label for="exampledisease" className="form-label">Disease</label>
+            <input type="name" value={disease} onChange={handleChange("disease")} className="form-control" id="exampledisease" />
+          </div>
+          <div className="mb-2">
+            <label for="exampledisease" className="form-label">Medicine</label>
+            <input type="name" value={medicine} onChange={handleChange("medicine")} className="form-control" id="examplemedicine" />
+          </div>
+          <div className="mb-3">
+            <label for="exampledisease" className="form-label">Discharge Date</label>
+            <input type="date" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
+          </div>
+          <div id="center">
+            <button type="submit" onClick={onSubmit} className="btn btn-primary">Submit</button>
+          </div>
+        </Form>
+      </div>
+    )
+  }
+
 
   return (
     <div>
-      <Navbar />
-      <Form className="container">
-        <div className="mb-2">
-          <label for="aadharNumber" className="form-label">Aadhar Number</label>
-          <input type="name" value={aadharNumber} onChange={handleChange("aadharNumber")} className="form-control" id="aadharNumber" />
-        </div>
-        <div id="center">
-          <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
-        </div>
-        <div className="mb-2">
-          <label for="examplehospitalName" className="form-label">Hospital Name</label>
-          <input type="name" value={hospitalName} onChange={handleChange("hospitalName")} className="form-control" id="examplehospitalName" />
-        </div>
-        <div className="mb-2">
-          <label for="exampledoctorName" className="form-label">Doctor Name</label>
-          <input type="name" value={doctorName} onChange={handleChange("doctorName")} className="form-control" id="exampledoctorName" />
-        </div>
-        <div className="mb-2">
-          <label for="exampledisease" className="form-label">Symptoms</label>
-          <input type="name" value={symptoms} onChange={handleChange("symptoms")} className="form-control" id="examplesymptoms" />
-        </div>
-        <div className="mb-2">
-          <label for="exampledisease" className="form-label">Disease</label>
-          <input type="name" value={disease} onChange={handleChange("disease")} className="form-control" id="exampledisease" />
-        </div>
-        <div className="mb-2">
-          <label for="exampledisease" className="form-label">Medicine</label>
-          <input type="name" value={medicine} onChange={handleChange("medicine")} className="form-control" id="examplemedicine" />
-        </div>
-        <div className="mb-3">
-          <label for="exampledisease" className="form-label">Discharge Date</label>
-          <input type="date" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
-        </div>
-        <div id="center">
-          <button type="submit" onClick={onSubmit} className="btn btn-primary">Submit</button>
-        </div>
-      </Form>
-
+      {hospitalForm()}
+      {errorMessage()}
     </div>
+
   );
 };
 
