@@ -26,12 +26,12 @@ const Navbar = ({ history }) => {
             icon={faUser}
             size="2x"
           />
-          <li className="nav-item" style={{ marginRight: 800 }}>
+          <li className="nav-item" id="nav-margin-user">
             <h6 className="text-light nav-link">{isAuthenticated().user.firstName}</h6>
           </li>
           <li className="nav-item">
             <Link to="/user/healthcard" style={currentTab(history, "/user/healthcard")} className="nav-link">
-              Health Card
+            HealthCard
               </Link>
           </li>
           <li className="nav-item">
