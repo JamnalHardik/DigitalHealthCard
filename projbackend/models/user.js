@@ -20,8 +20,7 @@ var userSchema = new mongoose.Schema({
         required: true
     },
     email: {
-        type: String,
-        unique: true,
+        type: String,        
         set: v => v.toLowerCase(),
         required: true
     },
