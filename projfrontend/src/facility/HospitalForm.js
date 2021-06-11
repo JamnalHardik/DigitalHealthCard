@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Jumbotron,
   Form,
   FormGroup,
   Label,
@@ -14,7 +15,7 @@ import { isAuthenticated } from '../auth/helper/index';
 import { getUser, fillData, getUserByAadhar } from './helper/facilityapicall'
 import Main from "./Main";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilePdf, faPen ,faChevronLeft} from '@fortawesome/free-solid-svg-icons'
+import { faFilePdf, faPen, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 const HospitalForm = () => {
   const [values, setValues] = useState({
@@ -73,10 +74,10 @@ const HospitalForm = () => {
     getUserByAadhar(aadharNumber)
       .then(data => {
         if (data.error) {
-          setValues({ ...values, error: data.error })
+          setValues({ ...values, error: data.error, success: false })
         } else {
           console.log(data);
-          setValues({ ...values, user: data, hospitalName: hospital.hospitalName })
+          setValues({ ...values, user: data, hospitalName: hospital.hospitalName, aadharNumber: "" })
           console.log(user);
         }
 
@@ -109,44 +110,54 @@ const HospitalForm = () => {
     return (
       <div>
         <Navbar />
-        
-        <Link to ="/hospital/dashboard" > 
-        <div id="left-align" className="mt-2">
-        <button className="btn mb-2 text-light" style={{ backgroundColor: '#207398'}}> <FontAwesomeIcon
+        <Jumbotron>
+        <h1 className="display-3">Hospital Form</h1>
+        <p className="lead">Enter Aadhar Card Number to fill Form.</p>
+        <hr className="my-2" />        
+        </Jumbotron>
+        <Link to="/hospital/dashboard" >
+          <div id="left-align" className="mt-2" style={{ marginLeft: 15 }}>
+            <button className="btn mb-2 text-light" style={{ backgroundColor: '#207398' }}> <FontAwesomeIcon
               className="text-white"
               icon={faChevronLeft}
-              size="1x" />  Dashboard </button>   
-              </div>
-        </Link> 
-        <Form className="container">    
-        
-        <Main name="aadhar" handle={handleChange} aadharNumber={aadharNumber} />
-          <div id="center">
-            <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
+              size="1x" />  Dashboard </button>
           </div>
-          <div className="mb-2">
-            <label for="exampledoctorName" className="form-label">Doctor Name*</label>
-            <input type="name" value={doctorName} onChange={handleChange("doctorName")} className="form-control" id="exampledoctorName" />
+        </Link>
+        <Form className="container">
+
+          <div className="mb-5 container text-center" style={{ width: 500 }} >
+            <Main name="aadhar" handle={handleChange} aadharNumber={aadharNumber} />
+            <div id="center">
+              <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
+            </div>
           </div>
-          <div className="mb-2">
-            <label for="exampledisease" className="form-label">Symptoms*</label>
-            <input type="name" value={symptoms} onChange={handleChange("symptoms")} className="form-control" id="examplesymptoms" />
-          </div>
-          <div className="mb-2">
-            <label for="exampledisease" className="form-label">Disease*</label>
-            <input type="name" value={disease} onChange={handleChange("disease")} className="form-control" id="exampledisease" />
-          </div>
-          <div className="mb-2">
-            <label for="exampledisease" className="form-label">Medicine*</label>
-            <input type="name" value={medicine} onChange={handleChange("medicine")} className="form-control" id="examplemedicine" />
-          </div>
-          <div className="mb-3">
-            <label for="exampledisease" className="form-label">Discharge Date*</label>
-            <input type="date" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
-          </div>
-          <div id="center">
-            <button type="submit" onClick={onSubmit} className="btn btn-primary">Submit</button>
-          </div>
+          {errorMessage()}
+          {user && <div>
+            <div className="mb-2">
+              <label for="exampledoctorName" className="form-label">Doctor Name*</label>
+              <input type="name" value={doctorName} onChange={handleChange("doctorName")} className="form-control" id="exampledoctorName" />
+            </div>
+            <div className="mb-2">
+              <label for="exampledisease" className="form-label">Symptoms*</label>
+              <input type="name" value={symptoms} onChange={handleChange("symptoms")} className="form-control" id="examplesymptoms" />
+            </div>
+            <div className="mb-2">
+              <label for="exampledisease" className="form-label">Disease*</label>
+              <input type="name" value={disease} onChange={handleChange("disease")} className="form-control" id="exampledisease" />
+            </div>
+            <div className="mb-2">
+              <label for="exampledisease" className="form-label">Medicine*</label>
+              <input type="name" value={medicine} onChange={handleChange("medicine")} className="form-control" id="examplemedicine" />
+            </div>
+            <div className="mb-3">
+              <label for="exampledisease" className="form-label">Discharge Date*</label>
+              <input type="date" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
+            </div>
+            <div id="center">
+              <button type="submit" onClick={onSubmit} className="mb-3 btn btn-primary">Submit</button>
+            </div>
+          </div>}
+
         </Form>
       </div>
     )
@@ -154,9 +165,9 @@ const HospitalForm = () => {
 
 
   return (
-    <div>
+    <div>      
       {hospitalForm()}
-      {errorMessage()}
+
     </div>
 
   );

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf, faPen } from '@fortawesome/free-solid-svg-icons'
 import Main from './Main';
 import {
+  Jumbotron,
   Form,
   FormGroup,
   Label,
@@ -86,14 +87,14 @@ const HospitalUI = () => {
     return (
       <div>
         <p style={{ display: (healthTable.length === 0 && success) ? "" : 'none' }} className="text-center text-secondary">Nothing to show</p>
-        <Link to="/hospital/form" >
-          <div id="center">
-            <button className="btn mb-2 text-light" style={{ backgroundColor: '#207398'}}> <FontAwesomeIcon
+        <div id="center">
+          <Link to="/hospital/form" >
+            <button type="button" className="btn mb-2 text-light" style={{ backgroundColor: '#207398' }}> <FontAwesomeIcon
               className="text-white"
               icon={faPen}
               size="1x" />  Fill Form </button>
-          </div>
-        </Link>        
+          </Link>
+        </div>
         {(healthTable.length !== 0) &&
           <div>
             <Table hover className="container table table-bordered">
@@ -136,12 +137,17 @@ const HospitalUI = () => {
   return (
     <div>
       <Navbar />
-      <Form className="mb-5 container text-center" style={{ width: 500 }}>
-        <Main aadharNumber={aadharNumber} handle={handleChange} />
-        <div id="center">
-          <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
-        </div>
-      </Form>
+      <Jumbotron>
+        <h1 className="display-3">Hospital Dashboard</h1>
+        <p className="lead">Search for the users by their given Aadhar Number to get their past medical history.</p>
+        <hr className="my-2" />        
+        <Form className="mb-5 container text-center" style={{ width: 500 }}>
+          <Main aadharNumber={aadharNumber} handle={handleChange} />
+          <div id="center">
+            <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
+          </div>
+        </Form>        
+      </Jumbotron>
       {errorMessage()}
       {healthCard()}
     </div>
