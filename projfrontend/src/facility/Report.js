@@ -41,12 +41,13 @@ const Report = (props) => {
         console.log();
         return (
             <div>
+                <div className="container border border-dark border-2 mt-2"> 
                 <Jumbotron>
                     {health && health.map((table, index) => (
                         <div key={index} value={index}>
                             <h1 className="display-5">Digital HealthCard</h1>
                             <h5 className="lead">A Detailed Report of your check-up.</h5>
-                            <hr className="my-2" />
+                            <hr className="my-2 mb-5" />
                             <p>{user.firstName} visited {table.hospitalName} where he/she was treated by {table.doctorName} where he/she was diagnosed with {table.disease}.</p> <br />
                             <p>The Symptoms include: {table.symptoms}</p><br />
                             <p>Medical Treatment Given: {table.medicine} </p> <br />
@@ -55,6 +56,7 @@ const Report = (props) => {
                     ))
                     }
                 </Jumbotron>
+                </div>
             </div>
         )
     }
@@ -62,7 +64,7 @@ const Report = (props) => {
     return (
         <div>
             {main()}
-            <div id="center">
+            <div id="center" className="mt-3">
                 <button type="button" onClick={pri} className="noprint btn btn-primary">Download</button>
             </div>
         </div>
