@@ -10,6 +10,7 @@ import {
   FormText,
   Button,
   Col,
+  Jumbotron
 } from "reactstrap";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
@@ -109,7 +110,13 @@ const Signin = () => {
   const SignInForm = () => {
     return (
       <div>
-        <Form id="form-main2" style={{ marginTop: 100 }}>
+         <Jumbotron>
+        <h1 className="display-5">Digital HealthCard Login</h1>
+        <p className="lead">Login to Access Health Card</p>
+        <hr className="my-2" />        
+              
+      </Jumbotron>
+        <Form id="form-main2" style={{ marginTop: 50 }}>
           <div id="header-form">
             <h2>Digital Health Card</h2>
           </div>

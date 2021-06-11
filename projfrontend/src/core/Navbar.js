@@ -29,7 +29,7 @@ const Navbar = ({ history }) => {
           <li className="nav-item" id="nav-margin-user">
             <h6 className="text-light nav-link">{isAuthenticated().user.firstName}</h6>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/user/healthcard" style={currentTab(history, "/user/healthcard")} className="nav-link">
             HealthCard
               </Link>
@@ -39,8 +39,8 @@ const Navbar = ({ history }) => {
           </li>
           <li className="nav-item">
             <Link style={currentTab(history, "/user/dashboard")} className="nav-link" to="/user/resports">DashBoard</Link>
-          </li>
-          <li className="nav-item" style={{padding: 8, cursor: "pointer"}}>
+          </li> */}
+          <li className="nav-item" style={{padding: 8, cursor: "pointer" ,marginLeft: 250}}>
             <span 
             style={currentTab(history, "/user/dashboard")}
               onClick={() => {

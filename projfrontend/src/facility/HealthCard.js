@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import Link from "react-router-dom";
 import Navbar from "../core/Navbar";
-import { Table } from "reactstrap";
+import { Table ,Jumbotron} from "reactstrap";
 import { getAllUserForms, getHospitalById } from "./helper/facilityapicall";
 import { Form, FormGroup, Label, Input, FormText, Button, Col } from "reactstrap";
 import { isAuthenticated } from "../auth/helper";
@@ -15,19 +15,19 @@ const HealthCard = () => {
   const [values, setValues] = useState({
     error: "",
     healthTable: "",
-
+    success: false
   })
 
   const { user } = isAuthenticated();
-  const { error, healthTable } = values;
+  const { error, healthTable, success } = values;
 
   const preload = async () => {
     await getAllUserForms(user._id).then(data => {
       if (data.error) {
-        setValues({ ...values, error: data.error })
+        setValues({ ...values, error: data.error, success: false })
       } else {
         console.log(data);
-        setValues({ ...values, healthTable: data });
+        setValues({ ...values, healthTable: data , success:true });
       }
     })
   }
@@ -35,7 +35,10 @@ const HealthCard = () => {
   useEffect(async () => {
     await preload()
   }, [])
-
+  const pri = () => {
+   const pri = document.getElementById("print")
+    window.print()
+   }
   // const handleChange = (name) => (event) => {
   // // ...values loads existing values
   //   setValues({ ...values, error: false, [name]: event.target.value });
@@ -44,9 +47,12 @@ const HealthCard = () => {
   const healthCard = () => {
     return (
       <div>
-        <div id="header-main" className="mb-5">
-          <h2>Health Card</h2>
-        </div>
+        <Jumbotron>
+        <h1 className="display-3">User Dashboard</h1>
+        <p className="lead">A collective health report from all your hospital visits.</p>
+        <hr className="my-2" />        
+              
+      </Jumbotron>
         <div>
           {/* <form className="container">
             <div className=""></div>
@@ -54,7 +60,10 @@ const HealthCard = () => {
             <Input onChange={handleChange("aadharNumber")} value={aadharNumber} type="text" />
           </form> */}
         </div>
-        <Table hover className="container table table-bordered">
+
+        <h3 style={{ display: (healthTable.length === 0 && success) ? "" : 'none' , color:"#242B2E"}} className="text-center">Welcome, {user.firstName}<br /> <h5 className="text-center">As you are a new user your health card will update after your next hospital visit.</h5> </h3>
+       
+        {healthTable.length !== 0 && <Table hover className="container table table-bordered">
           <thead className="text-light" style={{ backgroundColor: '#8e2de2' }}>
             <tr>
               <th>No.</th>
@@ -83,14 +92,15 @@ const HealthCard = () => {
               ))
             }
           </tbody>
-        </Table>
+        </Table>}
       </div>
     );
   };
   return (
-    <div>
+    <div id="print">
       <Navbar />
       {healthCard()}
+      {pri()}
     </div>
   );
 };
