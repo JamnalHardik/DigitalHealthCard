@@ -1,6 +1,6 @@
 // user calls
 
-export const getAllUserForms = async (userId, hospitalId, token) => {
+export const getAllUserForms = async (userId) => {
     return await fetch(`http://localhost:8000/api/user/form/${userId}`, {
         method: "GET"        
     })

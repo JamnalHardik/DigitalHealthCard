@@ -17,7 +17,7 @@ const Routes = () => {
                 <Route path="/signup" exact component={Signup} />
                 <Route path="/" exact component={Signin} />                
                 <UserRoute path="/user/healthcard" exact component={HealthCard} />
-                <UserRoute path="/report/download" exact component={Report} />
+                <UserRoute path="/report/download/:id" exact component={Report}  />
                 <HospitalRoute path="/hospital/dashboard" exact component={HospitalUI} />
                 <HospitalRoute path="/hospital/form" exact component={HospitalForm} />
             </Switch>

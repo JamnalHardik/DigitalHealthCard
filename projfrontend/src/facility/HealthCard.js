@@ -79,7 +79,7 @@ const HealthCard = () => {
                   <td>{table.doctorName}</td>
                   <td>{table.disease}</td>
                   <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
-                  <td><Link to="/report/download"><button className="btn btn-success">Download  <FontAwesomeIcon
+                  <td><Link to={`/report/download/${table._id}`}><button className="btn btn-success">Download  <FontAwesomeIcon
                     className="text-white"
                     icon={faFilePdf}
                     size="1x" /></button></Link></td>
