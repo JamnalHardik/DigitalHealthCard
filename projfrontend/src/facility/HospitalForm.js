@@ -13,6 +13,9 @@ import Navbar from "../core/Navbar_Hospital";
 import { isAuthenticated } from '../auth/helper/index';
 import { getUser, fillData, getUserByAadhar } from './helper/facilityapicall'
 import Main from "./Main";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilePdf, faPen ,faChevronLeft} from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 const HospitalForm = () => {
   const [values, setValues] = useState({
     hospitalName: "Shalby",
@@ -107,7 +110,16 @@ const HospitalForm = () => {
       <div>
         <Navbar />
         
-        <Form className="container">          
+        <Link to ="/hospital/dashboard" > 
+        <div id="left-align" className="mt-2">
+        <button className="btn mb-2 text-light" style={{ backgroundColor: '#207398'}}> <FontAwesomeIcon
+              className="text-white"
+              icon={faChevronLeft}
+              size="1x" />  Dashboard </button>   
+              </div>
+        </Link> 
+        <Form className="container">    
+        
         <Main name="aadhar" handle={handleChange} aadharNumber={aadharNumber} />
           <div id="center">
             <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>

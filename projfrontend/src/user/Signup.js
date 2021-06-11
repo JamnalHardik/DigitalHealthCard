@@ -264,7 +264,9 @@ const Signup = () => {
             </FormGroup>
             <div id="center"><Button color="primary" onClick={onSubmitHospital} size="lg">Submit</Button>{' '}</div>
           </div>}
-
+          <p id="center" className="mt-2">
+                Already a User? <Link to="/">Signin</Link>
+              </p>
         </Form>
       </div>
     )
