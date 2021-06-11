@@ -19,17 +19,17 @@ import {
 import "../styles.css"
 import { isAuthenticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
-const HospitalUI = () => {
+const HospitalUI = (props) => {
   const [values, setValues] = useState({
     aadharNumber: "",
     error: "",
-    user: "",
+    userId: "",
     healthTable: "",
     hospitalId: "",
     success: false
   })
   const { hospital, token } = isAuthenticated();
-  const { aadharNumber, error, user, healthTable, hospitalId, success } = values;
+  const { aadharNumber, error, userId, healthTable, hospitalId, success } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   }
@@ -53,28 +53,25 @@ const HospitalUI = () => {
 
   const onSearch = async (event) => {
     event.preventDefault();
-    console.log(aadharNumber);
     await getUserByAadhar(aadharNumber)
       .then(async (data) => {
         if (data.error) {
           setValues({ ...values, error: data.error, healthTable: "", success: false })
         } else {
-          console.log(data);
-          setValues({ ...values, user: data, hospitalId: hospital._id, success: true })
+          setValues({ ...values, userId: data, hospitalId: hospital._id, success: true })
+          localStorage.setItem("userId", data);
           await preload(data)
         }
       })
   }
 
   async function preload(userId) {
-    console.log(user);
     await getAllUserForms(userId).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error })
       } else {
         console.log(data);
         setValues({ ...values, healthTable: data, aadharNumber: "", success: true });
-        console.log(healthTable);
       }
     })
   }
@@ -110,18 +107,18 @@ const HospitalUI = () => {
                 </tr>
               </thead>
               <tbody>
-                {healthTable &&
+                {healthTable && 
                   healthTable.map((table, index) => (
                     <tr key={index} value={table._id}>
                       <td>{index + 1}</td>
                       <td>{table.hospitalName}</td>
                       <td>{table.doctorName}</td>
-                      <td>{table.disease}</td>
+                      <td>{table.disease}</td>                      
                       <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
-                      <td><button className="btn btn-success">Download  <FontAwesomeIcon
+                      <td><Link to={`/hospital/download/${table._id}`}><button className="btn btn-success">Download  <FontAwesomeIcon
                         className="text-white"
                         icon={faFilePdf}
-                        size="1x" /></button></td>
+                        size="1x" /></button></Link></td>
                     </tr>
                   ))
                 }
@@ -140,13 +137,13 @@ const HospitalUI = () => {
       <Jumbotron>
         <h1 className="display-3">Hospital Dashboard</h1>
         <p className="lead">Search for the users by their given Aadhar Number to get their past medical history.</p>
-        <hr className="my-2" />        
+        <hr className="my-2" />
         <Form className="mb-5 container text-center" style={{ width: 500 }}>
           <Main aadharNumber={aadharNumber} handle={handleChange} />
           <div id="center">
             <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
           </div>
-        </Form>        
+        </Form>
       </Jumbotron>
       {errorMessage()}
       {healthCard()}
