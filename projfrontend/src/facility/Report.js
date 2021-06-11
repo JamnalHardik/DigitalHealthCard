@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles.css'
 import {
     Jumbotron
-  } from "reactstrap";
+} from "reactstrap";
+import { isAuthenticated } from "../auth/helper";
+import { getAllUserForms } from './helper/facilityapicall';
+import Moment from 'moment';
+
 const Report = () => {
+    const [values, setValues] = useState({
+        error: "",
+        health: ""
+    })
+
+    const { health, error } = values;
+    const { user } = isAuthenticated();
+
+    const preloadData = async () => {
+        await getAllUserForms(user._id).then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error })
+            } else {
+                console.log(data);
+                setValues({ ...values, health: data });                
+            }
+        })
+    }
+
+    useEffect(async () => {
+        await preloadData()
+    }, [])
+
     const pri = () => {
         window.print()
     }
@@ -11,23 +38,29 @@ const Report = () => {
     const main = () => {
         return (
             <div>
-                <Jumbotron>
-        <h1 className="display-5">Digital HealthCard</h1>
-        <h5 className="lead">A Detailed Report of your check-up.</h5>
-        <hr className="my-2" />        
-        <p>Jamnal Hardik visited Hospital Name where he/she was treated by Doctor Name where he/she was diagoned with Disease.</p> <br/>
-        <p>The Symptoms include: </p><br/>
-        <p>Medical Treatment Given:</p> <br/>  
-        <p>Discharged on:</p> 
-      </Jumbotron>
+                <Jumbotron>                    
+                        {health && health.map((table, index) => (
+                            <div key={index} value={index}>                                
+                                <h1 className="display-5">Digital HealthCard</h1>
+                                <h5 className="lead">A Detailed Report of your check-up.</h5>
+                                <hr className="my-2" />
+                                <p>{user.firstName} visited {table.hospitalName} where he/she was treated by {table.doctorName} where he/she was diagnosed with {table.disease}.</p> <br />
+                                <p>The Symptoms include: {table.symptoms}</p><br />
+                                <p>Medical Treatment Given: {table.medicine} </p> <br />
+                                <p>Discharged on: {Moment(table.dischargeDate).format('DD-MM-YYYY')}</p>
+                            </div>
+                        ))
+                        }                    
+                </Jumbotron>
             </div>
         )
     }
+
     return (
         <div>
             {main()}
             <div id="center">
-            <button type="button" onClick={pri} className="noprint btn btn-primary">Download</button>
+                <button type="button" onClick={pri} className="noprint btn btn-primary">Download</button>
             </div>
         </div>
     )

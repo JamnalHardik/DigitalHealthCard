@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import Moment from 'moment';
 // import "../styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
