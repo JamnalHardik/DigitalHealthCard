@@ -4,9 +4,9 @@ import Moment from 'moment';
 // import "../styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
-import Link from "react-router-dom";
+import {Link} from "react-router-dom";
 import Navbar from "../core/Navbar";
-import { Table ,Jumbotron} from "reactstrap";
+import { Table, Jumbotron } from "reactstrap";
 import { getAllUserForms, getHospitalById } from "./helper/facilityapicall";
 import { Form, FormGroup, Label, Input, FormText, Button, Col } from "reactstrap";
 import { isAuthenticated } from "../auth/helper";
@@ -27,7 +27,7 @@ const HealthCard = () => {
         setValues({ ...values, error: data.error, success: false })
       } else {
         console.log(data);
-        setValues({ ...values, healthTable: data , success:true });
+        setValues({ ...values, healthTable: data, success: true });
       }
     })
   }
@@ -35,10 +35,6 @@ const HealthCard = () => {
   useEffect(async () => {
     await preload()
   }, [])
-  const pri = () => {
-   const pri = document.getElementById("print")
-    window.print()
-   }
   // const handleChange = (name) => (event) => {
   // // ...values loads existing values
   //   setValues({ ...values, error: false, [name]: event.target.value });
@@ -48,11 +44,11 @@ const HealthCard = () => {
     return (
       <div>
         <Jumbotron>
-        <h1 className="display-3">User Dashboard</h1>
-        <p className="lead">A collective health report from all your hospital visits.</p>
-        <hr className="my-2" />        
-              
-      </Jumbotron>
+          <h1 className="display-3">User Dashboard</h1>
+          <p className="lead">A collective health report from all your hospital visits.</p>
+          <hr className="my-2" />
+
+        </Jumbotron>
         <div>
           {/* <form className="container">
             <div className=""></div>
@@ -61,8 +57,8 @@ const HealthCard = () => {
           </form> */}
         </div>
 
-        <h3 style={{ display: (healthTable.length === 0 && success) ? "" : 'none' , color:"#242B2E"}} className="text-center">Welcome, {user.firstName}<br /> <h5 className="text-center">As you are a new user your health card will update after your next hospital visit.</h5> </h3>
-       
+        <h3 style={{ display: (healthTable.length === 0 && success) ? "" : 'none', color: "#242B2E" }} className="text-center">Welcome, {user.firstName}<br /> <h5 className="text-center">As you are a new user your health card will update after your next hospital visit.</h5> </h3>
+
         {healthTable.length !== 0 && <Table hover className="container table table-bordered">
           <thead className="text-light" style={{ backgroundColor: '#8e2de2' }}>
             <tr>
@@ -84,10 +80,10 @@ const HealthCard = () => {
                   <td>{table.doctorName}</td>
                   <td>{table.disease}</td>
                   <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
-                  <td><button className="btn btn-success">Download  <FontAwesomeIcon
+                  <td><Link to="/report/download"><button className="btn btn-success">Download  <FontAwesomeIcon
                     className="text-white"
                     icon={faFilePdf}
-                    size="1x"/></button></td>
+                    size="1x" /></button></Link></td>
                 </tr>
               ))
             }
@@ -100,7 +96,6 @@ const HealthCard = () => {
     <div id="print">
       <Navbar />
       {healthCard()}
-      {pri()}
     </div>
   );
 };

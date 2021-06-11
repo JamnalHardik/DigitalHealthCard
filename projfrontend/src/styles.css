@@ -87,3 +87,10 @@ label{
     justify-content: left;
     align-items: left;
 }
+
+
+@media print {
+   .noprint {
+      visibility: hidden;
+   }
+}
