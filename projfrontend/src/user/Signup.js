@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles.css'
 import '../sign.css'
-import { Form, FormGroup, Label, Input, FormText, Button, Col } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormText, Button, Col, Jumbotron } from 'reactstrap';
 import { signupHospital, signupUser } from '../auth/helper'
 import { Link } from 'react-router-dom';
 
@@ -142,9 +142,12 @@ const Signup = () => {
   const SignupForm = () => {
     return (
       <div >
-        <div id="header-main">
-          <h1>Digital Health Card</h1>
-        </div>
+        <Jumbotron className="bg-danger text-white text-center">
+          <h1 className="display-5">Digital HealthCard Signup</h1>
+          <p className="lead">Signup according to your category to Digital Health Card.</p>
+          <hr className="my-2" />
+
+        </Jumbotron>
         {errorMessage()}
         <Form id="form-main">
           <FormGroup row className="mb-2">            
@@ -220,19 +223,7 @@ const Signup = () => {
               <Col sm={10}>
                 <Input type="name" onChange={handleChange("address")} value={address} name="name" id="exampleadd1" placeholder="eg-Building Name and Number" />
               </Col>
-            </FormGroup>
-            <FormGroup row className="mb-2 ">
-              <Label for="exampleadd2" id="text-form" sm={2}>Address Line2*</Label>
-              <Col sm={10}>
-                <Input type="name" name="name" id="exampleadd2" placeholder="eg-City and District Name" />
-              </Col>
-            </FormGroup>
-            <FormGroup row className="mb-2 ">
-              <Label for="exampleadd3" id="text-form" sm={2}>Address Line3*</Label>
-              <Col sm={10}>
-                <Input type="name" name="name" id="exampleadd3" placeholder="eg-Nearby Landmark and Pincode" />
-              </Col>
-            </FormGroup>
+            </FormGroup>            
             <FormGroup row className="mb-2 ">
               <Label for="examplereg" id="text-form" sm={2}>Registration Number*</Label>
               <Col sm={10}>
@@ -246,7 +237,7 @@ const Signup = () => {
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
-              <Label for="exampleEmailHosp" sm={2}>Email</Label>
+              <Label for="exampleEmailHosp" sm={2}>Email*</Label>
               <Col sm={10}>
                 <Input type="email" onChange={handleChange("email")} value={email} name="email" id="exampleEmailHosp" placeholder="eg-poojanpandya@gmail.com" />
               </Col>
