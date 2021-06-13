@@ -61,7 +61,7 @@ const Navbar = ({history}) => {
             <span
               style={currentTab(history, "/hospital/dashboard")}
               onClick={() => {
-                signout(() => {
+                signout(() => {                  
                   history.push("/");
                 })
               }}>

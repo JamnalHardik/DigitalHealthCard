@@ -55,6 +55,7 @@ export const authenticate = (data, next) => {
 
 export const signout = next => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("userId");
     next();
     return fetch(`${API}/signout`, {
         method: "GET"

@@ -20,14 +20,14 @@ import { Link } from "react-router-dom";
 const HospitalForm = () => {
   const [values, setValues] = useState({
     hospitalName: "Shalby",
-    doctorName: "Meet",
-    symptoms: "Cold",
-    disease: "Fever",
-    medicine: "Paracetamol",
+    doctorName: "",
+    symptoms: "",
+    disease: "",
+    medicine: "",
     dischargeDate: "",
     error: "",
     success: "",
-    user: "",
+    user: localStorage.getItem("userId"),
     aadharNumber: ""
   })
   const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;
@@ -68,25 +68,27 @@ const HospitalForm = () => {
     );
   };
 
-  const onSearch = (event) => {
-    event.preventDefault();
-    console.log(aadharNumber);
-    getUserByAadhar(aadharNumber)
-      .then(data => {
-        if (data.error) {
-          setValues({ ...values, error: data.error, success: false })
-        } else {
-          console.log(data);
-          setValues({ ...values, user: data, hospitalName: hospital.hospitalName, aadharNumber: "" })
-          console.log(user);
-        }
+  const successMessage = () => {
+    return (
+      <div className="d-flex justify-content-center mt-2">
+        <div className="text-left text-center" style={{ width: 400 }}>
+          <div
+            className="alert text-white"
+            style={{ display: success ? "" : "none", backgroundColor: "#E21717" }}
+          >
 
-      })
-  }
+            <p>Form Submitted Succcessfully.</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
+  var count = 1;
   const onSubmit = (event) => {
     event.preventDefault()
     setValues({ ...values, success: false })
+    console.log(hospitalName);
     fillData(hospital._id, token, { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, user })
       .then(data => {
         if (data.error) {
@@ -102,6 +104,12 @@ const HospitalForm = () => {
             medicine: "",
             success: true
           })
+          setInterval(() => {
+            if(count == 0){
+              window.location = "/hospital/dashboard"
+            }
+            count--;
+          }, 500);
         }
       })
   }
@@ -125,13 +133,14 @@ const HospitalForm = () => {
         </Link>
         <Form className="container">
 
-          <div className="mb-5 container text-center" style={{ width: 500 }} >
+          {/* <div className="mb-5 container text-center" style={{ width: 500 }} >
             <Main name="aadhar" handle={handleChange} aadharNumber={aadharNumber} />
             <div id="center">
               <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
             </div>
-          </div>
+          </div> */}
           {errorMessage()}
+          {successMessage()}
           {user && <div>
             <div className="mb-2">
               <label for="exampledoctorName" className="form-label">Doctor Name*</label>

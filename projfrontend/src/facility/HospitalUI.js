@@ -42,14 +42,12 @@ const HospitalUI = (props) => {
             className="alert text-white"
             style={{ display: error ? "" : "none", backgroundColor: "#E21717" }}
           >
-
             {error}
           </div>
         </div>
       </div>
     );
   };
-
 
   const onSearch = async (event) => {
     event.preventDefault();
@@ -80,18 +78,18 @@ const HospitalUI = (props) => {
   //   await preload()
   // }, [])
 
-  const healthCard = () => {
+  const healthCard = () => {    
     return (
       <div>
         <p style={{ display: (healthTable.length === 0 && success) ? "" : 'none' }} className="text-center text-secondary">Nothing to show</p>
-        <div id="center">
+        {(localStorage.getItem("userId")) && <div id="center">
           <Link to="/hospital/form" >
             <button type="button" className="btn mb-2 text-light" style={{ backgroundColor: '#207398' }}> <FontAwesomeIcon
               className="text-white"
               icon={faPen}
               size="1x" />  Fill Form </button>
           </Link>
-        </div>
+        </div>}
         {(healthTable.length !== 0) &&
           <div>
             <Table hover className="container table table-bordered">
@@ -146,6 +144,7 @@ const HospitalUI = (props) => {
         </Form>
       </Jumbotron>
       {errorMessage()}
+      
       {healthCard()}
     </div>
   )
