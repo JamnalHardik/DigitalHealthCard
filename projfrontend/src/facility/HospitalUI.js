@@ -22,7 +22,7 @@ const HospitalUI = (props) => {
     firstName: "",
     lastName: "",
     dateOfBirth: {},
-    phoneNo: ""
+    phoneNo: 0
   })
   const { hospital, token } = isAuthenticated();
   const { aadharNumber, error, userId, healthTable, hospitalId, firstName, lastName, phoneNo, dateOfBirth, success, user } = values;
@@ -56,7 +56,7 @@ const HospitalUI = (props) => {
           localStorage.setItem("userId", data._id);
           localStorage.setItem("firstName", data.firstName)
           localStorage.setItem("lastName", data.lastName)
-          localStorage.setItem("phoneNo", data.phoneNo)
+          localStorage.setItem("phoneNo", data.mobileNumber)
           localStorage.setItem("dateOfBirth", data.dateOfBirth)
           await preload(data)
         }
@@ -79,6 +79,7 @@ const HospitalUI = (props) => {
         <p style={{ display: (healthTable.length === 0 && success) ? "" : 'none' }} className="text-center text-secondary">Nothing to show</p>
 
         {(localStorage.getItem("userId")) && <div> <div id="center">
+
           <Link to="/hospital/form" >
             <button type="button" className="btn mb-2 text-light" style={{ backgroundColor: '#207398' }}> <FontAwesomeIcon
               className="text-white"
