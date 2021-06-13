@@ -8,9 +8,7 @@ const { check } = require('express-validator');
 router.param("userId", getUserById);
 router.param("hospitalId", getHospitalById);
 
-router.get("/user/form/:userId", getAllUserForms);
-
-router.get("/user/:userId", getUser);
+router.get("/user/form/:userId", isSignedIn, isAuthenticated, getAllUserForms);
 
 router.post("/user/aadhar",
 [

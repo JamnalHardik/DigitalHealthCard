@@ -1,6 +1,19 @@
 const HospitalForm = require("../models/hospitalForm");
 const Hospital = require("../models/hospital");
+const User = require("../models/user");
 const { validationResult } = require("express-validator");
+
+exports.getUser = (req, res) => {
+    id = req.body.userId;
+    User.findById(id).exec((err, user) => {
+        if(err){
+            return res.status(400).json({
+                error: "User not found."
+            })
+        }
+        res.json(user);
+    })
+}
 
 exports.getHospitalById = async (req, res, next, id) => {
     await Hospital.findById(id).exec((err, hospital) => {
@@ -34,4 +47,17 @@ exports.fillData = (req, res) => {
             hospitalForm
         });
     });
+}
+
+exports.getAllUserFormsForHospital = async (req, res) => {    
+    id = req.body.userId;    
+    await HospitalForm.find({ user: id }).exec((err, form) => {
+        if (err || !form) {
+            return res.stauts(400).json({
+                error: "Nothing to show"
+            })
+        }
+        console.log(form);
+        res.json(form);
+    })
 }

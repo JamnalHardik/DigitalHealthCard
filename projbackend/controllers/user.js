@@ -62,6 +62,6 @@ exports.getUserByAadhar = (req, res) => {
             })
         }
 
-        res.json(user._id)
+        res.json(user)
     })
 }

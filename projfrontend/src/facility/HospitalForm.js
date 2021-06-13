@@ -118,7 +118,7 @@ const HospitalForm = () => {
     return (
       <div>
         <Navbar />
-        <Jumbotron>
+        <Jumbotron className="text-white bg-danger text-center">
         <h1 className="display-3">Hospital Form</h1>
         <p className="lead">Enter Aadhar Card Number to fill Form.</p>
         <hr className="my-2" />        

@@ -1,8 +1,28 @@
 // user calls
 
-export const getAllUserForms = async (userId) => {
+export const getAllUserForms = async (userId, token) => {
     return await fetch(`http://localhost:8000/api/user/form/${userId}`, {
-        method: "GET"        
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err))
+}
+
+export const getAllUserFormsForHospital = async (hospitalId, userId, token) => {
+    return await fetch(`http://localhost:8000/api/user/form/${hospitalId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({userId})
     })
         .then(response => {
             return response.json();
@@ -49,4 +69,20 @@ export const getUserByAadhar = (aadharNumber) => {
             return response.json();
         })
         .catch(err => console.log(err))
+}
+
+export const getUser = (hospitalId, userId, token) => {
+    return fetch(`http://localhost:8000/api/hospital/userData/${hospitalId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({userId})
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(err => console.log(err))
 }

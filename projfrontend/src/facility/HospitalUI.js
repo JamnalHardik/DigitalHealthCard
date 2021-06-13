@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from "../core/Navbar_Hospital";
-import { getAllUserForms, getUserByAadhar } from './helper/facilityapicall';
+import { getAllUserFormsForHospital, getUserByAadhar, getUser } from './helper/facilityapicall';
 import Moment from 'moment';
 import { Table } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,10 +26,15 @@ const HospitalUI = (props) => {
     userId: "",
     healthTable: "",
     hospitalId: "",
-    success: false
+    user: "",
+    success: false,
+    firstName: "",
+    lastName: "",
+    dateOfBirth: {},
+    phoneNo: ""
   })
   const { hospital, token } = isAuthenticated();
-  const { aadharNumber, error, userId, healthTable, hospitalId, success } = values;
+  const { aadharNumber, error, userId, healthTable, hospitalId, firstName, lastName, phoneNo, dateOfBirth, success, user } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   }
@@ -56,40 +61,57 @@ const HospitalUI = (props) => {
         if (data.error) {
           setValues({ ...values, error: data.error, healthTable: "", success: false })
         } else {
-          setValues({ ...values, userId: data, hospitalId: hospital._id, success: true })
-          localStorage.setItem("userId", data);
+          console.log(data);
+          setValues({ ...values, userId: data._id, hospitalId: hospital._id, success: true })
+          localStorage.setItem("userId", data._id);
+          localStorage.setItem("firstName", data.firstName)
+          localStorage.setItem("lastName", data.lastName)
+          localStorage.setItem("phoneNo", data.phoneNo)
+          localStorage.setItem("dateOfBirth", data.dateOfBirth)
           await preload(data)
         }
       })
   }
 
-  async function preload(userId) {
-    await getAllUserForms(userId).then(data => {
+  async function preload() {
+    await getAllUserFormsForHospital(hospital._id, localStorage.getItem("userId"), token).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error })
       } else {
-        console.log(data);
         setValues({ ...values, healthTable: data, aadharNumber: "", success: true });
       }
     })
   }
 
-  // useEffect(async () => {
-  //   await preload()
-  // }, [])
-
-  const healthCard = () => {    
+  const healthCard = () => {
     return (
-      <div>
+      <div className="mb-5">
         <p style={{ display: (healthTable.length === 0 && success) ? "" : 'none' }} className="text-center text-secondary">Nothing to show</p>
-        {(localStorage.getItem("userId")) && <div id="center">
+
+        {(localStorage.getItem("userId")) && <div> <div id="center">
           <Link to="/hospital/form" >
             <button type="button" className="btn mb-2 text-light" style={{ backgroundColor: '#207398' }}> <FontAwesomeIcon
               className="text-white"
               icon={faPen}
               size="1x" />  Fill Form </button>
           </Link>
+        </div>
         </div>}
+        {(healthTable.length !== 0) &&
+          <div id="center" className="mb-4">
+            <div className="card text-center" style={{ width: 300 }}>
+              <div className="card-body border border-secondary">
+                <h5 className="card-title mb-1">User Information</h5>
+                <hr />
+                <div>
+                  <p className="mb-1">Name: {localStorage.getItem("firstName")} {localStorage.getItem("lastName")}</p>
+                  <p className="mb-1">Date Of Birth: {Moment(localStorage.getItem("dateOfBirth")).format('DD-MM-YYYY')}</p>
+                  <p className="mb-1">Phone Number: {localStorage.getItem("phoneNo")}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
         {(healthTable.length !== 0) &&
           <div>
             <Table hover className="container table table-bordered">
@@ -105,13 +127,13 @@ const HospitalUI = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {healthTable && 
+                {healthTable &&
                   healthTable.map((table, index) => (
                     <tr key={index} value={table._id}>
                       <td>{index + 1}</td>
                       <td>{table.hospitalName}</td>
                       <td>{table.doctorName}</td>
-                      <td>{table.disease}</td>                      
+                      <td>{table.disease}</td>
                       <td>{Moment(table.dischargeDate).format('DD-MM-YYYY')}</td>
                       <td><Link to={`/hospital/download/${table._id}`}><button className="btn btn-success">Download  <FontAwesomeIcon
                         className="text-white"
@@ -128,23 +150,22 @@ const HospitalUI = (props) => {
     )
 
   }
-
   return (
     <div>
       <Navbar />
-      <Jumbotron>
+      <Jumbotron className="bg-danger text-white text-center">
         <h1 className="display-3">Hospital Dashboard</h1>
         <p className="lead">Search for the users by their given Aadhar Number to get their past medical history.</p>
         <hr className="my-2" />
-        <Form className="mb-5 container text-center" style={{ width: 500 }}>
-          <Main aadharNumber={aadharNumber} handle={handleChange} />
-          <div id="center">
-            <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
-          </div>
-        </Form>
       </Jumbotron>
+      <Form className="mb-5 container text-center" style={{ width: 500 }}>
+        <Main aadharNumber={aadharNumber} handle={handleChange} />
+        <div id="center">
+          <button type="submit" onClick={onSearch} className="btn btn-primary">Search</button>
+        </div>
+      </Form>
       {errorMessage()}
-      
+
       {healthCard()}
     </div>
   )

@@ -36,12 +36,12 @@ const Signin = () => {
   };
 
   const performRedirect = () => {
-    if (didRedirect) {      
+    if (didRedirect) {
       if (user && user.userRole === "User") {
         console.log(user);
         return <Redirect to="/user/healthcard" />
       }
-      if (hospital && hospital.userRole === "Hospital") {        
+      if (hospital && hospital.userRole === "Hospital") {
         return <Redirect to="/hospital/dashboard" />
       }
     }
@@ -99,7 +99,7 @@ const Signin = () => {
             className="alert text-white"
             style={{ display: error ? "" : "none", backgroundColor: "#E21717" }}
           >
-            
+
             {error}
           </div>
         </div>
@@ -110,12 +110,12 @@ const Signin = () => {
   const SignInForm = () => {
     return (
       <div>
-         <Jumbotron>
-        <h1 className="display-5">Digital HealthCard Login</h1>
-        <p className="lead">Login to Access Health Card</p>
-        <hr className="my-2" />        
-              
-      </Jumbotron>
+        <Jumbotron className="bg-danger text-white text-center">
+          <h1 className="display-5">Digital HealthCard Login</h1>
+          <p className="lead">Login to Access Health Card</p>
+          <hr className="my-2" />
+
+        </Jumbotron>
         <Form id="form-main2" style={{ marginTop: 50 }}>
           <div id="header-form">
             <h2>Digital Health Card</h2>

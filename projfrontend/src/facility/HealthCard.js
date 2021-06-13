@@ -17,11 +17,11 @@ const HealthCard = () => {
     success: false
   })
 
-  const { user } = isAuthenticated();
+  const { user, token } = isAuthenticated();
   const { error, healthTable, success } = values;
 
   const preload = async () => {
-    await getAllUserForms(user._id).then(data => {
+    await getAllUserForms(user._id, token).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error, success: false })
       } else {
@@ -42,19 +42,12 @@ const HealthCard = () => {
   const healthCard = () => {
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron className="bg-danger text-white text-center">
           <h1 className="display-3">User Dashboard</h1>
           <p className="lead">A collective health report from all your hospital visits.</p>
           <hr className="my-2" />
 
-        </Jumbotron>
-        <div>
-          {/* <form className="container">
-            <div className=""></div>
-            <label htmlFor="aadharNumber">Aadhar Number: </label>
-            <Input onChange={handleChange("aadharNumber")} value={aadharNumber} type="text" />
-          </form> */}
-        </div>
+        </Jumbotron>        
 
         <h3 style={{ display: (healthTable.length === 0 && success) ? "" : 'none', color: "#242B2E" }} className="text-center">Welcome, {user.firstName}<br /> <h5 className="text-center">As you are a new user your health card will update after your next hospital visit.</h5> </h3>
 

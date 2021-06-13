@@ -1,7 +1,7 @@
 var express = require('express');
 const { isSignedIn, isAuthenticated, isAdmin } = require('../controllers/auth');
 var router = express.Router();
-const { fillData, getHospitalById } = require("../controllers/hospital");
+const { fillData, getHospitalById, getAllUserFormsForHospital, getUser } = require("../controllers/hospital");
 const { getUserById, getAllUsers, getAllUserForms } = require("../controllers/user");
 const { check } = require('express-validator');
 
@@ -28,9 +28,11 @@ router.post("/hospital/form/:hospitalId",
             .withMessage('Discharge date is required.'),
     ],
     isSignedIn, isAuthenticated, fillData);
-router.get("/hospital/users/:hospitalId", isSignedIn, isAuthenticated, getAllUsers);
-// router.get("/hospital/:hospitalId", getHospitalById);
 
-// router.get("/user/form/:userId/:hospitalId", isSignedIn, isAuthenticated,  getAllUserForms);
+router.get("/hospital/users/:hospitalId", isSignedIn, isAuthenticated, getAllUsers);
+
+router.post("/hospital/userdata/:hospitalId", isSignedIn, isAuthenticated, getUser);
+
+router.post("/user/form/:hospitalId", isSignedIn, isAuthenticated, getAllUserFormsForHospital);
 
 module.exports = router;

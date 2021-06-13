@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Link, Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import Home from './core/Home'
 import Signup from './user/Signup'
 import Signin from './user/Signin'
@@ -10,6 +10,7 @@ import HospitalUI from './facility/HospitalUI'
 import HospitalForm from './facility/HospitalForm'
 import Report from './facility/Report'
 import ReportHospital from './facility/ReportHospital'
+import Error from './core/Error'
 
 const Routes = () => {
     return (
@@ -22,6 +23,8 @@ const Routes = () => {
                 <HospitalRoute path="/hospital/download/:id" exact component={ReportHospital}  />
                 <HospitalRoute path="/hospital/dashboard" exact component={HospitalUI} />
                 <HospitalRoute path="/hospital/form" exact component={HospitalForm} />
+                <Route path="/error" component={Error} />
+                <Redirect to="/error" />
             </Switch>
         </Router>
     )
