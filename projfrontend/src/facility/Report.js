@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import '../styles.css'
 import {
-    Jumbotron
+Jumbotron, Button
 } from "reactstrap";
 import { isAuthenticated } from "../auth/helper";
 import { getAllUserForms } from './helper/facilityapicall';
 import Moment from 'moment';
+import {Link} from 'react-router-dom';
+
 
 const Report = (props) => {
     const [values, setValues] = useState({
         error: "",
         health: ""
     })
+
 
     const { health, error } = values;
     const { user, token } = isAuthenticated();
@@ -82,7 +85,8 @@ const Report = (props) => {
         <div>
             {main()}
             <div id="center" className="my-5">
-                <button type="button" onClick={pri} className="noprint btn btn-primary">Download</button>
+                <Button type="button" onClick={pri} className="noprint" style={{ marginRight: 23 }} color="primary">Download</Button>
+                <Link to="/user/healthcard"><Button className="noprint" type="button" color="success">Go Back</Button></Link>
             </div>
         </div>
     )

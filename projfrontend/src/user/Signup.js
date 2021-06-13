@@ -101,7 +101,7 @@ const Signup = () => {
               registrationNumber: "",
               email: "",
               password: "",
-              password2: "",              
+              password2: "",
               mobileNumber: "",
               error: "",
               success: true
@@ -117,12 +117,12 @@ const Signup = () => {
   const errorMessage = () => {
     return (
 
-      <div className="d-flex justify-content-center mt-2">
-      <div className="text-left text-center" style={{width:400}}>
-        <div className="alert text-white" style={{ display: error ? "" : "none" , backgroundColor:'#E21717'}}> {error} </div>
+      <div className="d-flex justify-content-center mt-3">
+        <div className="text-left text-center" style={{ width: 300 }}>
+          <div className="alert text-white" style={{ display: error ? "" : "none", backgroundColor: '#E21717', padding: 5 }}> {error} </div>
+        </div>
       </div>
-    </div>
-    
+
     )
 
   }
@@ -130,8 +130,8 @@ const Signup = () => {
   const successMessage = () => {
     return (
       <div className="d-flex justify-content-center mt-2">
-      <div className="text-left text-center" style={{width:400}}>
-          <div className="alert alert-success text-white" style={{ display: success ? "" : "none" ,backgroundColor:'#6EC72D'}}>New Account create successfully. Please <Link to="/">Login Here</Link> </div>
+        <div className="text-left text-center" style={{ width: 400 }}>
+          <div className="alert alert-success text-white" style={{ display: success ? "" : "none", backgroundColor: '#6EC72D' }}>New Account create successfully. Please <Link to="/">Login Here</Link> </div>
         </div>
       </div>
     )
@@ -145,11 +145,12 @@ const Signup = () => {
         <div id="header-main">
           <h1>Digital Health Card</h1>
         </div>
+        {errorMessage()}
         <Form id="form-main">
-          <FormGroup row className="mb-2">
+          <FormGroup row className="mb-2">            
             <Label for="exampleSelect" sm={2}>Category</Label>
             <Col sm={10}>
-              <select name="select" id="exampleSelect" onChange={handleSelect()} style={{width: 200, height: 30}} autoFocus>
+              <select name="select" id="exampleSelect" onChange={handleSelect()} style={{ width: 200, height: 30 }} autoFocus>
                 <option id="user">User</option>
                 <option id="hospital">Hospital</option>
               </select>
@@ -204,7 +205,7 @@ const Signup = () => {
                 <Input type="tel" name="phone" value={mobileNumber} id="examplePhone" placeholder="" onChange={handleChange("mobileNumber")} />
               </Col>
             </FormGroup>
-            <div id="center"><Button onClick={onSubmit} color="primary" size="lg">Submit</Button>{' '}</div>
+            <div id="center"><Button onClick={onSubmit} color="primary" size="md" style={{ width: 200 }}>Submit</Button>{' '}</div>
           </div>}
 
           {userRole === "Hospital" && <div>
@@ -262,11 +263,15 @@ const Signup = () => {
                 <Input type="password" onChange={handleChange("password2")} value={password2} name="password2" id="examplePassword2Hosp" className="mt-2" placeholder="" />
               </Col>
             </FormGroup>
-            <div id="center"><Button color="primary" onClick={onSubmitHospital} size="lg">Submit</Button>{' '}</div>
+            <div id="center"><Button color="primary" onClick={onSubmitHospital} size="md" style={{width: 200}}>Submit</Button>{' '}</div>
           </div>}
-          <p id="center" className="mt-2">
-                Already a User? <Link to="/">Signin</Link>
-              </p>
+          <hr />
+          <div id="center">
+            <p>Already A User?</p>
+          </div>
+          <div id="center">
+            <Link to="/"><Button type="button" color="success">Sign in</Button></Link>
+          </div>
         </Form>
       </div>
     )
@@ -275,7 +280,6 @@ const Signup = () => {
   return (
     <div>
       {SignupForm()}
-      {errorMessage()}
       {successMessage()}
     </div>
   )

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles.css";
 import "../sign.css";
 import { Link, Redirect } from "react-router-dom";
+
 import {
   Form,
   FormGroup,
@@ -148,7 +149,7 @@ const Signin = () => {
                   />
                 </Col>
               </FormGroup>
-              <FormGroup row style={{ marginBottom: 70 }} id="center">
+              <FormGroup row style={{ marginBottom: 50 }} id="center">
                 <Col sm={11}>
                   <Input
                     type="password"
@@ -161,13 +162,18 @@ const Signin = () => {
                 </Col>
               </FormGroup>
               <div id="center" style={{ marginBottom: 20 }}>
-                <Button onClick={onSubmit} color="primary" size="md">
+                <Button onClick={onSubmit} color="primary" size="md" style={{width: 200}}>
                   Log in
                 </Button>{" "}
               </div>
-              <p id="center">
-                New User? <Link to="/signup">Signup</Link>
-              </p>
+              <hr />
+              <div id="center">
+                <p>Don't Have an account? </p>
+              </div>
+              <div id="center">
+                <Link to="/signup"><Button type="button" color="success">Sign up</Button></Link>
+              </div>
+
             </div>
           )}
 
@@ -190,7 +196,7 @@ const Signin = () => {
                   />
                 </Col>
               </FormGroup>
-              <FormGroup row style={{ marginBottom: 70 }} id="center">
+              <FormGroup row style={{ marginBottom: 50 }} id="center">
                 <Col sm={11}>
                   <Input
                     type="password"
@@ -203,13 +209,17 @@ const Signin = () => {
                 </Col>
               </FormGroup>
               <div id="center" style={{ marginBottom: 20 }}>
-                <Button onClick={onSubmitHospital} color="primary" size="md">
+                <Button onClick={onSubmit} color="primary" size="md" style={{width: 200}}>
                   Log in
                 </Button>{" "}
               </div>
-              <p id="center">
-                New User? <Link to="/signup">Signup</Link>
-              </p>
+              <hr />
+              <div id="center">
+                <p>Don't Have an account? </p>
+              </div>
+              <div id="center">
+                <Link to="/signup"><Button type="button" color="success">Sign up</Button></Link>
+              </div>
             </div>
           )}
         </Form>

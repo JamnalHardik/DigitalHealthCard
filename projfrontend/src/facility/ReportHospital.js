@@ -85,7 +85,7 @@ const ReportHospital = (props) => {
                 {main()}
                 <div id="center" className="mt-3">
                     <Button type="button" onClick={pri} className="noprint" style={{marginRight: 23}} color="primary">Download</Button>
-                    <Link to="/hospital/dashboard"><Button type="button" color="success">Go Back</Button></Link>
+                    <Link to="/hospital/dashboard"><Button className="noprint" type="button" color="success">Go Back</Button></Link>
                 </div>
             </div>
         </div>
