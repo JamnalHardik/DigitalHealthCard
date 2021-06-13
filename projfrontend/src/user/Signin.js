@@ -94,29 +94,30 @@ const Signin = () => {
 
   const errorMessage = () => {
     return (
-      <div className="d-flex justify-content-center mt-2">
-        <div className="text-left text-center" style={{ width: 400 }}>
-          <div
-            className="alert text-white"
-            style={{ display: error ? "" : "none", backgroundColor: "#E21717" }}
-          >
 
-            {error}
-          </div>
+      <div className="d-flex justify-content-center mt-3">
+        <div className="text-left text-center" style={{ width: 300 }}>
+          <div className="alert text-white" style={{ display: error ? "" : "none", backgroundColor: '#E21717', padding: 5 }}> {error} </div>
         </div>
       </div>
-    );
-  };
+
+    )
+
+  }
 
   const SignInForm = () => {
     return (
       <div>
-        <Jumbotron className="bg-danger text-white text-center">
-          <h1 className="display-5">Digital HealthCard Login</h1>
-          <p className="lead">Login to Access Health Card</p>
+        <Jumbotron className="bg-danger text-white">
+          <h1 className="display-5  text-center">Digital HealthCard Login</h1>
+          <p className="lead  text-center">Login to Access Health Card</p>
+          <Link id="left-align" className="ml-2" style={{ marginLeft: 15 }} to ="/"><button  type="button" className="btn btn-outline-light">
+              Home
+            </button></Link>
           <hr className="my-2" />
-
+          
         </Jumbotron>
+       
         <Form id="form-main2" style={{ marginTop: 50 }}>         
           <FormGroup row className="mb-2">
             <Label for="exampleSelect" sm={3}>Login As</Label>
@@ -127,12 +128,13 @@ const Signin = () => {
               </select>
             </Col>
           </FormGroup>
+          {errorMessage()}
           {userRole === "User" && (
             <div>
               <FormGroup
                 row
                 className="mb-4 "
-                style={{ marginTop: 80 }}
+                style={{ marginTop: 15 }}
                 id="center"
               >
                 <Col sm={11}>
@@ -179,7 +181,7 @@ const Signin = () => {
               <FormGroup
                 row
                 className="mb-4 "
-                style={{ marginTop: 80 }}
+                style={{ marginTop: 15 }}
                 id="center"
               >
                 <Col sm={11}>
@@ -226,8 +228,8 @@ const Signin = () => {
 
   return (
     <div>
+      
       {SignInForm()}
-      {errorMessage()}
       {performRedirect()}
     </div>
   );

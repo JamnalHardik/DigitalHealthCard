@@ -131,7 +131,7 @@ const Signup = () => {
     return (
       <div className="d-flex justify-content-center mt-2">
         <div className="text-left text-center" style={{ width: 400 }}>
-          <div className="alert alert-success text-white" style={{ display: success ? "" : "none", backgroundColor: '#6EC72D' }}>New Account create successfully. Please <Link to="/">Login Here</Link> </div>
+          <div className="alert alert-success text-white" style={{ display: success ? "" : "none", backgroundColor: '#6EC72D' }}>New Account create successfully. Please <Link to="/signin">Login Here</Link> </div>
         </div>
       </div>
     )
@@ -142,9 +142,12 @@ const Signup = () => {
 
     return (
       <div >
-        <Jumbotron className="bg-danger text-white text-center">
-          <h1 className="display-5">Digital HealthCard Signup</h1>
-          <p className="lead">Signup according to your category to Digital Health Card.</p>
+        <Jumbotron className="bg-danger text-white ">
+          <h1 className="display-5 text-center">Digital HealthCard Signup</h1>
+          <p className="lead text-center">Signup according to your category to Digital Health Card.</p>
+          <Link id="left-align" className="ml-2" style={{ marginLeft: 15 }} to ="/"><button  type="button" className="btn btn-outline-light">
+              Home
+            </button></Link>
           <hr className="my-2" />
 
         </Jumbotron>
@@ -187,7 +190,7 @@ const Signup = () => {
             <FormGroup row className="mb-2">
               <Label for="examplePassword" sm={2}>Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password" value={password} id="examplePassword" placeholder="Password must be greater than 5 characters" onChange={handleChange("password")} />
+                <Input type="password" name="password" value={password} id="examplePassword" placeholder="Password must be atleast 5 character long" onChange={handleChange("password")} />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
@@ -205,7 +208,7 @@ const Signup = () => {
             <FormGroup row className="mb-3">
               <Label for="examplePhone" sm={2}>Phone No</Label>
               <Col sm={10}>
-                <Input type="tel" name="phone" value={mobileNumber} id="examplePhone" placeholder="" onChange={handleChange("mobileNumber")} />
+                <Input type="tel" name="phone" value={mobileNumber} id="examplePhone" placeholder="10 Digit Mobile Number" onChange={handleChange("mobileNumber")} />
               </Col>
             </FormGroup>
             <div id="center"><Button onClick={onSubmit} color="primary" size="md" style={{ width: 200 }}>Submit</Button>{' '}</div>
@@ -219,7 +222,7 @@ const Signup = () => {
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2 ">
-              <Label for="exampleadd1" id="text-form" sm={2}>Address Line1*</Label>
+              <Label for="exampleadd1" id="text-form" sm={2}>Address*</Label>
               <Col sm={10}>
                 <Input type="name" onChange={handleChange("address")} value={address} name="name" id="exampleadd1" placeholder="" />
               </Col>
@@ -243,15 +246,15 @@ const Signup = () => {
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2">
-              <Label for="examplePasswordHosp" sm={2}>Password</Label>
+              <Label for="examplePasswordHosp" sm={2}>Password*</Label>
               <Col sm={10}>
-                <Input type="password" onChange={handleChange("password")} value={password} name="password" id="examplePasswordHosp" placeholder="" />
+                <Input type="password" onChange={handleChange("password")} value={password} name="password" id="examplePasswordHosp" placeholder="Password must be atleast 5 character long" />
               </Col>
             </FormGroup>
             <FormGroup row className="mb-2 mt-2">
-              <Label for="examplePassword2Hosp" sm={2}>Confirm Password</Label>
+              <Label for="examplePassword2Hosp" sm={2}>Confirm Password*</Label>
               <Col sm={10}>
-                <Input type="password" onChange={handleChange("password2")} value={password2} name="password2" id="examplePassword2Hosp" className="mt-2" placeholder="" />
+                <Input type="password" onChange={handleChange("password2")} value={password2} name="password2" id="examplePassword2Hosp" className="mt-2" placeholder="Re-enter same password as above" />
               </Col>
             </FormGroup>
             <div id="center"><Button color="primary" onClick={onSubmitHospital} size="md" style={{ width: 200 }}>Submit</Button>{' '}</div>
@@ -261,7 +264,7 @@ const Signup = () => {
             <p>Already A User?</p>
           </div>
           <div id="center">
-            <Link to="/"><Button type="button" color="success">Sign in</Button></Link>
+            <Link to="/signin"><Button type="button" color="success">Sign in</Button></Link>
           </div>
         </Form>
       </div>

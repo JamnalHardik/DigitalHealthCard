@@ -10,6 +10,7 @@ import HospitalUI from './facility/HospitalUI'
 import HospitalForm from './facility/HospitalForm'
 import Report from './facility/Report'
 import ReportHospital from './facility/ReportHospital'
+import Index from './MainPage/Index'
 import Error from './core/Error'
 
 const Routes = () => {
@@ -17,13 +18,14 @@ const Routes = () => {
         <Router>
             <Switch>
                 <Route path="/signup" exact component={Signup} />
-                <Route path="/" exact component={Signin} />                
+                <Route path="/signin" exact component={Signin} />                
                 <UserRoute path="/user/healthcard" exact component={HealthCard} />
                 <UserRoute path="/report/download/:id" exact component={Report}  />
                 <HospitalRoute path="/hospital/download/:id" exact component={ReportHospital}  />
                 <HospitalRoute path="/hospital/dashboard" exact component={HospitalUI} />
                 <HospitalRoute path="/hospital/form" exact component={HospitalForm} />
                 <Route path="/error" component={Error} />
+                <Route path="/" exact component={Index} />
                 <Redirect to="/error" />
             </Switch>
         </Router>

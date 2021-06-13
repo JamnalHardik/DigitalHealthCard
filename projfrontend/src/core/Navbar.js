@@ -37,7 +37,7 @@ const Navbar = ({ history }) => {
             className="text-white"            
               onClick={() => {
                 signout(() => {
-                  history.push("/");
+                  history.push("/signin");
                 })
               }}>
               Signout</span>
