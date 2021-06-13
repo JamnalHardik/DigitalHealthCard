@@ -20,10 +20,14 @@ router.post("/hospital/signup",
             .withMessage('Hospital Name is required.'),
         check('mobileNumber')
             .notEmpty()
-            .withMessage('Phone Number is required.'),
+            .withMessage('Phone Number is required.')
+            .isLength({ min: 10, max: 10 })
+            .withMessage('Phone Number must be 10 characters long.'),
         check('registrationNumber')
             .notEmpty()
-            .withMessage('Registration Number is required.'),
+            .withMessage('Registration Number is required.')
+            .isLength({ min: 12, max: 12 })
+            .withMessage('Registration Number must be 12 characters long.'),
         check('address')
             .notEmpty()
             .withMessage('Address is required.'),
@@ -52,8 +56,8 @@ router.post("/user/signup",
             .notEmpty()
             .withMessage('Date of Birth is required.'),
         check('mobileNumber')
-        .isLength({ min: 10, max: 10 })
-        .withMessage('Phone Number must be 10 characters long.'),    
+            .isLength({ min: 10, max: 10 })
+            .withMessage('Phone Number must be 10 characters long.'),
     ], signup);
 
 router.post("/signin",

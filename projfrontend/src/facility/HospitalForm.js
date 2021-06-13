@@ -18,8 +18,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf, faPen, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 const HospitalForm = () => {
+  const { hospital, token } = isAuthenticated();  
   const [values, setValues] = useState({
-    hospitalName: "Shalby",
+    hospitalName: hospital.hospitalName,
     doctorName: "",
     symptoms: "",
     disease: "",
@@ -29,10 +30,9 @@ const HospitalForm = () => {
     success: "",
     user: localStorage.getItem("userId"),
     aadharNumber: ""
-  })
-  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;
-  const { hospital, token } = isAuthenticated();
-
+  })  
+  
+  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;      
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   }
@@ -87,16 +87,14 @@ const HospitalForm = () => {
   var count = 1;
   const onSubmit = (event) => {
     event.preventDefault()
-    setValues({ ...values, success: false })
-    console.log(hospitalName);
-    fillData(hospital._id, token, { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, user })
+    setValues({ ...values, success: false })    
+    fillData(hospital._id, token, {  hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, user })
       .then(data => {
         if (data.error) {
           setValues({ ...values, error: data.error, success: false })
         } else {
-          console.log(data);
           setValues({
-            hospitalName: "",
+            hospitalN: "",
             doctorName: "",
             symptoms: "",
             dischargeDate: "",
@@ -105,7 +103,7 @@ const HospitalForm = () => {
             success: true
           })
           setInterval(() => {
-            if(count == 0){
+            if (count == 0) {
               window.location = "/hospital/dashboard"
             }
             count--;
@@ -119,9 +117,9 @@ const HospitalForm = () => {
       <div>
         <Navbar />
         <Jumbotron className="text-white bg-danger text-center">
-        <h1 className="display-3">Hospital Form</h1>
-        <p className="lead">Enter Aadhar Card Number to fill Form.</p>
-        <hr className="my-2" />        
+          <h1 className="display-3">Hospital Form</h1>
+          <p className="lead">Fill Form to update HealthCard.</p>
+          <hr className="my-2" />
         </Jumbotron>
         <Link to="/hospital/dashboard" >
           <div id="left-align" className="mt-2" style={{ marginLeft: 15 }}>
@@ -160,7 +158,7 @@ const HospitalForm = () => {
             </div>
             <div className="mb-3">
               <label for="exampledisease" className="form-label">Discharge Date*</label>
-              <input type="date" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
+              <input type="date" min="1997-01-01" max="2021-06-14" value={dischargeDate} onChange={handleChange("dischargeDate")} className="form-control" id="exampledischargedate" />
             </div>
             <div id="center">
               <button type="submit" onClick={onSubmit} className="mb-3 btn btn-primary">Submit</button>
@@ -174,7 +172,7 @@ const HospitalForm = () => {
 
 
   return (
-    <div>      
+    <div>
       {hospitalForm()}
 
     </div>

@@ -8,14 +8,6 @@ import { signout } from "../auth/helper";
 import { isAuthenticated } from "../auth/helper";
 import { getUserByAadhar } from '../facility/helper/facilityapicall'
 
-const currentTab = (history, path) => {
-  if (history.location.pathname === path) {
-    return { color: "#FFFFFF" }
-  } else {
-    return { color: "grey" }
-  }
-}
-
 const Navbar = ({history}) => {  
   const [values, setValues] = useState({
     user: "",
@@ -58,8 +50,8 @@ const Navbar = ({history}) => {
           </li>
          
           <li className="nav-item" style={{ padding: 8, cursor: "pointer" }}>
-            <span
-              style={currentTab(history, "/hospital/dashboard")}
+            <span            
+              className="text-white"
               onClick={() => {
                 signout(() => {                  
                   history.push("/");

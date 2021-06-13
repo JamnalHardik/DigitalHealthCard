@@ -117,13 +117,10 @@ const Signin = () => {
           <hr className="my-2" />
 
         </Jumbotron>
-        <Form id="form-main2" style={{ marginTop: 50 }}>
-          <div id="header-form">
-            <h2>Digital Health Card</h2>
-          </div>
+        <Form id="form-main2" style={{ marginTop: 50 }}>         
           <FormGroup row className="mb-2">
-            <Label for="exampleSelect" sm={2}>Category</Label>
-            <Col sm={10} style={{ padding: 6 }} className="d-flex justify-content-center">
+            <Label for="exampleSelect" sm={3}>Login As</Label>
+            <Col sm={9} style={{ padding: 6 }} className="d-flex justify-content-center">
               <select name="select" id="exampleSelect" onChange={handleSelect()} style={{ width: 200, height: 30 }} autoFocus>
                 <option id="user">User</option>
                 <option id="hospital">Hospital</option>

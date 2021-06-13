@@ -7,14 +7,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { signout } from "../auth/helper";
 import { isAuthenticated } from "../auth/helper";
 
-const currentTab = (history, path) => {
-  if (history.location.pathname === path) {
-    return { color: "#FFFFFF" }
-  } else {
-    return { color: "grey" }
-  }
-}
-
 const Navbar = ({ history }) => {
   return (
     <div>
@@ -42,7 +34,7 @@ const Navbar = ({ history }) => {
           </li> */}
           <li className="nav-item" style={{padding: 8, cursor: "pointer" ,marginLeft: 250}}>
             <span 
-            style={currentTab(history, "/user/dashboard")}
+            className="text-white"            
               onClick={() => {
                 signout(() => {
                   history.push("/");
