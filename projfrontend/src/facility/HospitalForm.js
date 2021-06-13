@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from "react";
-import {
-  Jumbotron,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Button,
-  Col,
-} from "reactstrap";
+import React, { useState } from "react";
+import { Jumbotron, Form, } from "reactstrap";
 import "../styles.css";
 import Navbar from "../core/Navbar_Hospital";
 import { isAuthenticated } from '../auth/helper/index';
-import { getUser, fillData, getUserByAadhar } from './helper/facilityapicall'
+import { fillData } from './helper/facilityapicall'
 import Main from "./Main";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilePdf, faPen, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 const HospitalForm = () => {
-  const { hospital, token } = isAuthenticated();  
+  const { hospital, token } = isAuthenticated();
   const [values, setValues] = useState({
     hospitalName: hospital.hospitalName,
     doctorName: "",
@@ -30,27 +21,12 @@ const HospitalForm = () => {
     success: "",
     user: localStorage.getItem("userId"),
     aadharNumber: ""
-  })  
-  
-  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;      
+  })
+
+  const { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, error, success, user, aadharNumber } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   }
-
-  // const loadUser = () => {
-  //   getUser('60bcf9ccc938ea0df027a904').then(data => {
-  //     if(data.error){
-  //       setValues({...values, error: data.error})
-  //     } else {
-  //       console.log(data);
-  //       setValues({...values, user})
-  //     }
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   loadUser()
-  // }, [])
 
   const errorMessage = () => {
     return (
@@ -60,7 +36,6 @@ const HospitalForm = () => {
             className="alert text-white"
             style={{ display: error ? "" : "none", backgroundColor: "#E21717" }}
           >
-
             {error}
           </div>
         </div>
@@ -76,7 +51,6 @@ const HospitalForm = () => {
             className="alert text-white"
             style={{ display: success ? "" : "none", backgroundColor: "#E21717" }}
           >
-
             <p>Form Submitted Succcessfully.</p>
           </div>
         </div>
@@ -87,8 +61,8 @@ const HospitalForm = () => {
   var count = 1;
   const onSubmit = (event) => {
     event.preventDefault()
-    setValues({ ...values, success: false })    
-    fillData(hospital._id, token, {  hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, user })
+    setValues({ ...values, success: false })
+    fillData(hospital._id, token, { hospitalName, doctorName, symptoms, dischargeDate, disease, medicine, user })
       .then(data => {
         if (data.error) {
           setValues({ ...values, error: data.error, success: false })

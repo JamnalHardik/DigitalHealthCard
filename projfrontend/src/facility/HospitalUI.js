@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Navbar from "../core/Navbar_Hospital";
-import { getAllUserFormsForHospital, getUserByAadhar, getUser } from './helper/facilityapicall';
+import { getAllUserFormsForHospital, getUserByAadhar } from './helper/facilityapicall';
 import Moment from 'moment';
 import { Table } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf, faPen } from '@fortawesome/free-solid-svg-icons'
 import Main from './Main';
-import {
-  Jumbotron,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Button,
-  Col
-} from "reactstrap";
+import { Jumbotron, Form } from "reactstrap";
 import "../styles.css"
 import { isAuthenticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
@@ -61,7 +52,6 @@ const HospitalUI = (props) => {
         if (data.error) {
           setValues({ ...values, error: data.error, healthTable: "", success: false })
         } else {
-          console.log(data);
           setValues({ ...values, userId: data._id, hospitalId: hospital._id, success: true })
           localStorage.setItem("userId", data._id);
           localStorage.setItem("firstName", data.firstName)

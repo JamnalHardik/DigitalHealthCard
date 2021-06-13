@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Moment from 'moment';
-// import "../styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../core/Navbar";
 import { Table, Jumbotron } from "reactstrap";
-import { getAllUserForms, getHospitalById } from "./helper/facilityapicall";
-import { Form, FormGroup, Label, Input, FormText, Button, Col } from "reactstrap";
+import { getAllUserForms } from "./helper/facilityapicall";
 import { isAuthenticated } from "../auth/helper";
 
 const HealthCard = () => {
@@ -25,7 +23,6 @@ const HealthCard = () => {
       if (data.error) {
         setValues({ ...values, error: data.error, success: false })
       } else {
-        console.log(data);
         setValues({ ...values, healthTable: data, success: true });
       }
     })
@@ -34,10 +31,6 @@ const HealthCard = () => {
   useEffect(async () => {
     await preload()
   }, [])
-  // const handleChange = (name) => (event) => {
-  // // ...values loads existing values
-  //   setValues({ ...values, error: false, [name]: event.target.value });
-  // };
 
   const healthCard = () => {
     return (
@@ -47,7 +40,7 @@ const HealthCard = () => {
           <p className="lead">A collective health report from all your hospital visits.</p>
           <hr className="my-2" />
 
-        </Jumbotron>        
+        </Jumbotron>
 
         <h3 style={{ display: (healthTable.length === 0 && success) ? "" : 'none', color: "#242B2E" }} className="text-center">Welcome, {user.firstName}<br /> <h5 className="text-center">As you are a new user your health card will update after your next hospital visit.</h5> </h3>
 

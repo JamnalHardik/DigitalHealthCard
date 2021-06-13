@@ -35,8 +35,7 @@ exports.fillData = (req, res) => {
             error: errors.array()[0].msg,
         });
     }
-    const hospitalForm = new HospitalForm(req.body);
-    console.log(req.body);
+    const hospitalForm = new HospitalForm(req.body);    
     hospitalForm.save((err, hospitalForm) => {
         if (err) {
             return res.status(400).json({
@@ -56,8 +55,7 @@ exports.getAllUserFormsForHospital = async (req, res) => {
             return res.stauts(400).json({
                 error: "Nothing to show"
             })
-        }
-        console.log(form);
+        }        
         res.json(form);
     })
 }
