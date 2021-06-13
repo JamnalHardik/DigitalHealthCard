@@ -52,6 +52,7 @@ const HospitalUI = (props) => {
         if (data.error) {
           setValues({ ...values, error: data.error, healthTable: "", success: false })
         } else {
+          console.log(data);
           setValues({ ...values, userId: data._id, hospitalId: hospital._id, success: true })
           localStorage.setItem("userId", data._id);
           localStorage.setItem("firstName", data.firstName)
