@@ -11,7 +11,7 @@ import {
   FormText,
   Button,
   Col,
-  Jumbotron
+  Jumbotron,
 } from "reactstrap";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
@@ -40,17 +40,17 @@ const Signin = () => {
     if (didRedirect) {
       if (user && user.userRole === "User") {
         console.log(user);
-        return <Redirect to="/user/healthcard" />
+        return <Redirect to="/user/healthcard" />;
       }
       if (hospital && hospital.userRole === "Hospital") {
-        return <Redirect to="/hospital/dashboard" />
+        return <Redirect to="/hospital/dashboard" />;
       }
     }
 
     if (isAuthenticated()) {
-      return <Redirect to="/" />
+      return <Redirect to="/" />;
     }
-  }
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -59,6 +59,7 @@ const Signin = () => {
       .then((data) => {
         console.log(data);
         if (data.error) {
+          console.log(data.error);
           setValues({ ...values, error: data.error });
         } else {
           authenticate(data, () => {
@@ -94,16 +95,23 @@ const Signin = () => {
 
   const errorMessage = () => {
     return (
-
       <div className="d-flex justify-content-center mt-3">
         <div className="text-left text-center" style={{ width: 300 }}>
-          <div className="alert text-white" style={{ display: error ? "" : "none", backgroundColor: '#E21717', padding: 5 }}> {error} </div>
+          <div
+            className="alert text-white"
+            style={{
+              display: error ? "" : "none",
+              backgroundColor: "#E21717",
+              padding: 5,
+            }}
+          >
+            {" "}
+            {error}{" "}
+          </div>
         </div>
       </div>
-
-    )
-
-  }
+    );
+  };
 
   const SignInForm = () => {
     return (
@@ -111,18 +119,36 @@ const Signin = () => {
         <Jumbotron className="bg-danger text-white">
           <h1 className="display-5  text-center">Digital HealthCard Login</h1>
           <p className="lead  text-center">Login to Access Health Card</p>
-          <Link id="left-align" className="ml-2" style={{ marginLeft: 15 }} to ="/"><button  type="button" className="btn btn-outline-light">
+          <Link
+            id="left-align"
+            className="ml-2"
+            style={{ marginLeft: 15 }}
+            to="/"
+          >
+            <button type="button" className="btn btn-outline-light">
               Home
-            </button></Link>
+            </button>
+          </Link>
           <hr className="my-2" />
-          
         </Jumbotron>
-       
-        <Form id="form-main2" style={{ marginTop: 50 }}>         
+
+        <Form id="form-main2" style={{ marginTop: 50 }}>
           <FormGroup row className="mb-2">
-            <Label for="exampleSelect" sm={3}>Login As</Label>
-            <Col sm={9} style={{ padding: 6 }} className="d-flex justify-content-center">
-              <select name="select" id="exampleSelect" onChange={handleSelect()} style={{ width: 200, height: 30 }} autoFocus>
+            <Label for="exampleSelect" sm={3}>
+              Login As
+            </Label>
+            <Col
+              sm={9}
+              style={{ padding: 6 }}
+              className="d-flex justify-content-center"
+            >
+              <select
+                name="select"
+                id="exampleSelect"
+                onChange={handleSelect()}
+                style={{ width: 200, height: 30 }}
+                autoFocus
+              >
                 <option id="user">User</option>
                 <option id="hospital">Hospital</option>
               </select>
@@ -161,7 +187,12 @@ const Signin = () => {
                 </Col>
               </FormGroup>
               <div id="center" style={{ marginBottom: 20 }}>
-                <Button onClick={onSubmit} color="primary" size="md" style={{width: 200}}>
+                <Button
+                  onClick={onSubmit}
+                  color="primary"
+                  size="md"
+                  style={{ width: 200 }}
+                >
                   Log in
                 </Button>{" "}
               </div>
@@ -170,9 +201,12 @@ const Signin = () => {
                 <p>Don't Have an account? </p>
               </div>
               <div id="center">
-                <Link to="/signup"><Button type="button" color="success">Sign up</Button></Link>
+                <Link to="/signup">
+                  <Button type="button" color="success">
+                    Sign up
+                  </Button>
+                </Link>
               </div>
-
             </div>
           )}
 
@@ -208,7 +242,12 @@ const Signin = () => {
                 </Col>
               </FormGroup>
               <div id="center" style={{ marginBottom: 20 }}>
-                <Button onClick={onSubmit} color="primary" size="md" style={{width: 200}}>
+                <Button
+                  onClick={onSubmit}
+                  color="primary"
+                  size="md"
+                  style={{ width: 200 }}
+                >
                   Log in
                 </Button>{" "}
               </div>
@@ -217,7 +256,11 @@ const Signin = () => {
                 <p>Don't Have an account? </p>
               </div>
               <div id="center">
-                <Link to="/signup"><Button type="button" color="success">Sign up</Button></Link>
+                <Link to="/signup">
+                  <Button type="button" color="success">
+                    Sign up
+                  </Button>
+                </Link>
               </div>
             </div>
           )}
@@ -228,7 +271,6 @@ const Signin = () => {
 
   return (
     <div>
-      
       {SignInForm()}
       {performRedirect()}
     </div>
