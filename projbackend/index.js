@@ -20,7 +20,8 @@ mongoose
   })
   .then(() => {
     console.log("Database Connected");
-  });
+  })
+  .catch((err) => console.log(err));
 
 // Middlewares
 app.use(
