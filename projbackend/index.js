@@ -37,6 +37,9 @@ app.use(cookieParser());
 app.use(cors());
 
 // my routes
+app.get("/test-route", (req, res) => {
+  res.send("Api responded successfully!!");
+});
 app.use("/api", authRoutes);
 app.use("/api", hospitalRoutes);
 app.use("/api", userRoutes);
